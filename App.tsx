@@ -1,16 +1,18 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { Provider as PaperProvider, Title } from 'react-native-paper'
+import { StatusBar } from 'expo-status-bar'
+import { Provider as PaperProvider } from 'react-native-paper'
 
+import { I18nProvider } from './providers/i18nProvider'
 import { theme } from './themes'
+import { MainRoutes } from './routes/routes'
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <Title>
-        Siema siema o tej porze
-      </Title>
-      <StatusBar style="auto" />
+      <I18nProvider>
+        <MainRoutes />
+        <StatusBar style="auto" />
+      </I18nProvider>
     </PaperProvider>
   )
 }
