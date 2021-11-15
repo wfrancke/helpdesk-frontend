@@ -2,9 +2,9 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { Provider as PaperProvider } from 'react-native-paper'
 
-import { I18nProvider } from './providers/i18nProvider'
-import { theme } from './themes'
-import { MainRoutes } from './routes/routes'
+import { I18nProvider } from './src/providers/i18nProvider'
+import { theme } from './src/themes'
+import { MainRoutes } from './src/routes/routes'
 
 export default function App() {
   return (

@@ -10,9 +10,6 @@ const theme = {
     text: '#000000',
     background: '#FFFFFF',
   },
-  fonts: {
-    ...DefaultTheme.fonts,
-  }
 }
 
 export { theme }
