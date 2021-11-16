@@ -1,13 +1,65 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Title } from 'react-native-paper'
+import { Link } from 'react-router-native'
+import { View, StyleSheet, Dimensions, Text } from 'react-native'
+import { Button } from 'react-native-paper'
+
+import { theme } from '../../themes'
+import logo from '../../../assets/logo.png'
+import * as Styled from './RegisterScreen.styles'
 
 export const RegisterScreen = () => {
   const { t } = useTranslation()
 
+  const styles = StyleSheet.create({
+    rootContainer: {
+      height: Dimensions.get('window').height
+    },
+  })
+
   return (
-    <Title>
-      {t('register.register')}
-    </Title>
+    <Styled.RootContainer style={styles.rootContainer}>
+      <Styled.HeaderLogo source={logo}/>
+      <Styled.HeaderTitle>
+        {t('register.createAccount')}
+      </Styled.HeaderTitle>
+      <Styled.LoginInput
+        label={t('common.firstName')}
+        mode='outlined'
+      />
+      <Styled.LoginInput
+        label={t('common.lastName')}
+        mode='outlined'
+      />
+      <Styled.LoginInput
+        label={t('common.email')}
+        mode='outlined'
+      />
+      <View style={{margin: 20}}>
+        <Styled.LoginInput
+          label={t('common.password')}
+          mode='outlined'
+        />
+        <Styled.LoginInput
+          label={t('register.repeatPassword')}
+          mode='outlined'
+        />
+      </View>
+      <Styled.LoginButton
+        mode='contained'
+        uppercase={false}
+        onPress={() => console.log('halo')}
+      >
+        <Text style={{color: theme.colors.background, fontSize: 19}}>
+          {t('register.register')}
+        </Text>
+      </Styled.LoginButton>
+      <Link to='/'>
+        <View style={{flexDirection: 'row', margin: 10}}>
+          <Text style={{color: theme.colors.text}}>{t('register.alreadyAccount')}</Text>
+          <Text style={{color: theme.colors.primary}}>{t('login.login')}</Text>
+        </View>
+      </Link>
+    </Styled.RootContainer>
   )
 }

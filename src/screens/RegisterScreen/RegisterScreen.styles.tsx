@@ -26,7 +26,7 @@ const LoginInput = styled(TextInput)`
 `
 
 const LoginButton = styled(Button)`
-  margin: 50px 0 0 0;
+  margin: 30px 0 0 0;
   width: 300px;
   height: 50px;
   justify-content: center;
