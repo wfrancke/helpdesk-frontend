@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-native'
+import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
@@ -10,12 +10,18 @@ import * as Styled from './LoginScreen.styles'
 
 export const LoginScreen = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const styles = StyleSheet.create({
     rootContainer: {
       height: Dimensions.get('window').height
     },
   })
+
+  const handleLogin = () => {
+    console.log('zalogowano')
+    navigation.navigate('MyTickets')
+  }
 
   return (
     <Styled.RootContainer style={styles.rootContainer}>
@@ -41,13 +47,13 @@ export const LoginScreen = () => {
       <Styled.LoginButton
         mode='contained'
         uppercase={false}
-        onPress={() => console.log('halo')}
+        onPress={handleLogin}
       >
         <Text style={{color: theme.colors.background, fontSize: 19}}>
           {t('login.login')}
         </Text>
       </Styled.LoginButton>
-      <Link to='/register'>
+      <Link to={{ screen: 'Register' }}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <Text style={{color: theme.colors.text}}>{t('login.noAccount')}</Text>
           <Text style={{color: theme.colors.primary}}>{t('register.register')}</Text>

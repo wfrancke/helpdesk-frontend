@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-native'
+import { Link } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
@@ -54,7 +54,7 @@ export const RegisterScreen = () => {
           {t('register.register')}
         </Text>
       </Styled.LoginButton>
-      <Link to='/'>
+      <Link to={{ screen: 'Login'}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <Text style={{color: theme.colors.text}}>{t('register.alreadyAccount')}</Text>
           <Text style={{color: theme.colors.primary}}>{t('login.login')}</Text>

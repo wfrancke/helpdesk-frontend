@@ -12,6 +12,8 @@
   "dependencies": {
     "@emotion/native": "^11.0.0",
     "@emotion/react": "^11.6.0",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
     "constate": "^3.3.0",
     "date-fns": "^2.25.0",
     "expo": "~43.0.2",
@@ -26,6 +28,8 @@
     "react-i18next": "^11.14.2",
     "react-native": "0.64.3",
     "react-native-paper": "^4.10.0",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.8.0",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
     "react-router-native": "^6.0.2",
