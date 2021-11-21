@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button } from 'react-native-paper'
+import { isMobile } from 'react-device-detect'
 
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
@@ -19,8 +20,8 @@ export const LoginScreen = () => {
   })
 
   const handleLogin = () => {
-    console.log('zalogowano')
-    navigation.navigate('MyTickets')
+    console.log(isMobile)
+    navigation.navigate('Home')
   }
 
   return (
