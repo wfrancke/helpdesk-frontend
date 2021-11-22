@@ -20,7 +20,6 @@ export const LoginScreen = () => {
   })
 
   const handleLogin = () => {
-    console.log(isMobile)
     navigation.navigate('Home')
   }
 
