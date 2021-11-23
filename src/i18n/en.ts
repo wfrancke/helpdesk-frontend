@@ -5,6 +5,7 @@ export default {
       lastName: 'Last name',
       email: 'Email',
       password: 'Password',
+      submit: 'Submit'
     },
     login: {
       login: 'Login',
@@ -17,6 +18,14 @@ export default {
       register: 'Register',
       repeatPassword: 'Repeat password',
       alreadyAccount: 'Already have an account? ',
-    }
+    },
+    myTickets: {
+      myTickets: 'My Tickets',
+      searchByTitle: 'Search by title',
+      sortByDate: 'Sort by date',
+      sortByTitle: 'Sort by title',
+      sortByPriority: 'Sort by priority',
+      sortByStatus: 'Sort by status'
+    },
   }
 }

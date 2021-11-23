@@ -23,7 +23,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='email-send' {...props} />}
             label='My Tickets'
-            onPress={() => props.navigation.navigate('My Tickets')}
+            onPress={() => props.navigation.navigate('MyTickets')}
             focused={props.state.history.length === 1}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
@@ -33,7 +33,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='at' {...props} />}
             label='Assigned Tickets'
-            onPress={() => props.navigation.navigate('Assigned Tickets')}
+            onPress={() => props.navigation.navigate('AssignedTickets')}
             focused={props.state.history.length === 2}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
@@ -43,7 +43,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='account-group' {...props} />}
             label='Team Tickets'
-            onPress={() => props.navigation.navigate('My Tickets')}
+            onPress={() => props.navigation.navigate('MyTickets')}
             focused={props.state.history.length === 3}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
@@ -53,7 +53,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='chart-bar' {...props} />}
             label='Statistics'
-            onPress={() => props.navigation.navigate('My Tickets')}
+            onPress={() => props.navigation.navigate('MyTickets')}
             focused={props.state.history.length === 4}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
@@ -63,7 +63,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='account-circle' {...props} />}
             label='Account'
-            onPress={() => props.navigation.navigate('My Tickets')}
+            onPress={() => props.navigation.navigate('MyTickets')}
             focused={props.state.history.length === 5}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
