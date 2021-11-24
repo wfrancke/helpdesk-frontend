@@ -3,7 +3,7 @@ import { Link } from '@react-navigation/native'
 
 import * as Styled from './TicketArea.styles'
 
-interface TicketAreaProps {
+export interface TicketItemType {
   id: number,
   title: string,
   name: string,
@@ -11,28 +11,26 @@ interface TicketAreaProps {
   status: string
 }
 
-export const TicketArea = ({
-  id,
-  title,
-  name,
-  priority,
-  status
-}: TicketAreaProps) => {
+interface TicketAreaProps {
+  values: TicketItemType
+}
+
+export const TicketArea = ({ values }: TicketAreaProps) => {
   return (
-    <Link to={{ screen: 'TicketDetails', params: { ticketId: id }}}>
+    <Link to={{ screen: 'TicketDetails', params: { ticketId: values.id }}}>
       <Styled.RootContainer>
         <Styled.Title>
-          {title}
+          {values.title}
         </Styled.Title>
         <Styled.Text>
-          {name}
+          {values.name}
         </Styled.Text>
         <Styled.SecondaryContainer>
           <Styled.Text>
-            {priority}
+            {values.priority}
           </Styled.Text>
           <Styled.Text>
-            {status}
+            {values.status}
           </Styled.Text>
         </Styled.SecondaryContainer>
       </Styled.RootContainer>

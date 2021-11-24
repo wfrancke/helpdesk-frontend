@@ -13,6 +13,7 @@ const RootContainer = styled.View`
   background-color: ${theme.colors.background};
   border: 1px solid ${theme.colors.secondary};
   border-radius: 5px;
+  margin-top: 8px;
 `
 
 const StyledTitle = styled(Title)`

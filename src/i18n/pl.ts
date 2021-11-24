@@ -5,7 +5,10 @@ export default {
       lastName: 'Nazwisko',
       email: 'Email',
       password: 'Hasło',
-      submit: 'Utwórz'
+      submit: 'Utwórz',
+      title: 'Tytuł',
+      priority: 'Priorytet',
+      status: 'Status'
     },
     login: {
       login: 'Zaloguj się',
@@ -26,6 +29,10 @@ export default {
       sortByName: 'Sortuj wg nazwy',
       sortByPriority: 'Sortuj wg priorytetu',
       sortByStatus: 'Sortuj wg statusu'
-    }
+    },
+    ticketList: {
+      requester: 'Zgłaszający',
+      assignee: 'Przypisany',
+    },
   }
 }
