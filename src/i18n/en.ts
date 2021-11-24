@@ -10,6 +10,14 @@ export default {
       priority: 'Priority',
       status: 'Status'
     },
+    drawer: {
+      myTickets: 'My tickets',
+      assignedTickets: 'Assigned tickets',
+      teamTickets: 'Team tickets',
+      statistics: 'Statistics',
+      account: 'Account',
+      logOut: 'Log out'
+    },
     login: {
       login: 'Login',
       username: 'Username or E-mail',
@@ -22,8 +30,10 @@ export default {
       repeatPassword: 'Repeat password',
       alreadyAccount: 'Already have an account? ',
     },
-    myTickets: {
-      myTickets: 'My Tickets',
+    tickets: {
+      myTickets: 'My tickets',
+      assignedTickets: 'Assigned tickets',
+      teamTickets: 'Team tickets',
       searchByTitle: 'Search by title',
       sortByDate: 'Sort by date',
       sortByTitle: 'Sort by title',

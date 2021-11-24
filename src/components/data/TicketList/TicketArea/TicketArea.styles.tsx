@@ -7,13 +7,12 @@ import { theme } from '../../../../themes'
 const RootContainer = styled.View`
   display: flex;
   flex-direction: ${isMobile === false ? 'row' : 'column'};
-  min-width: 320px;
+  min-width: 340px;
   min-height: 80px;
   padding: 20px;
   background-color: ${theme.colors.background};
   border: 1px solid ${theme.colors.secondary};
   border-radius: 5px;
-  margin-top: 8px;
 `
 
 const StyledTitle = styled(Title)`

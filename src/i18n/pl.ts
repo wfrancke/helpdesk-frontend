@@ -10,6 +10,14 @@ export default {
       priority: 'Priorytet',
       status: 'Status'
     },
+    drawer: {
+      myTickets: 'Moje zgłoszenia',
+      assignedTickets: 'Przypisane zgłoszenia',
+      teamTickets: 'Zgłoszenia zespołu',
+      statistics: 'Statystyki',
+      account: 'Konto',
+      logOut: 'Wyloguj się'
+    },
     login: {
       login: 'Zaloguj się',
       username: 'Nazwa użytkownika lub e-mail',
@@ -22,8 +30,10 @@ export default {
       repeatPassword: 'Powtórz hasło',
       alreadyAccount: 'Masz już konto? ',
     },
-    myTickets: {
+    tickets: {
       myTickets: 'Moje zgłoszenia',
+      assignedTickets: 'Przypisane zgłoszenia',
+      teamTickets: 'Zgłoszenia zespołu',
       searchByTitle: 'Szukaj wg tytułu',
       sortByDate: 'Sortuj wg daty',
       sortByName: 'Sortuj wg nazwy',

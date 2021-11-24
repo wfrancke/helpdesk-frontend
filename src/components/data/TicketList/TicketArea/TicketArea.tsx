@@ -16,11 +16,17 @@ interface TicketAreaProps {
 }
 
 export const TicketArea = ({ values }: TicketAreaProps) => {
+  const title = values.title.length >= 20
+    ? values.title.substr(0, 16) + '...'
+    : values.title
+
   return (
-    <Link to={{ screen: 'TicketDetails', params: { ticketId: values.id }}}>
+    <Link to={{ screen: 'TicketDetails', params: { ticketId: values.id }}}
+      style={{ marginTop: 8 }}
+    >
       <Styled.RootContainer>
         <Styled.Title>
-          {values.title}
+          {title}
         </Styled.Title>
         <Styled.Text>
           {values.name}

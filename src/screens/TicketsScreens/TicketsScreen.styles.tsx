@@ -1,5 +1,4 @@
 import styled from '@emotion/native'
-import { Platform } from 'react-native'
 import { Title, TextInput, Button } from 'react-native-paper'
 
 import { theme } from '../../themes'
@@ -8,13 +7,13 @@ const RootContainer = styled.View`
   display: flex;
   flex-direction: column;
   margin: 30px 5%;
-  padding-top: ${Platform.OS === 'android' ? 25 : 0};
 `
 
 const HeaderTitle = styled(Title)`
   margin: 20px 0;
   font-weight: bold;
   font-size: 36px;
+  line-height: 36px;
 `
 
 const ActionsContainer = styled.View`
