@@ -18,7 +18,7 @@ const RootContainer = styled.View`
 const StyledTitle = styled(Title)`
   flex: 3;
   font-weight: 600;
-  font-size: 26px;
+  font-size: 22px;
   min-width: 160px;
 `
 

@@ -126,7 +126,7 @@ export const MyTicketsScreen = () => {
         </Styled.ActionsContainer>
         <TicketList
           items={placeholderData}
-          isAssigned={false}
+          isRequested
         />
       </Styled.RootContainer>
     </ScrollView>

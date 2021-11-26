@@ -7,10 +7,10 @@ import * as Styled from './TicketList.styles'
 
 interface TicketListProps {
   items: TicketItemType[]
-  isAssigned: boolean
+  isRequested?: boolean
 }
 
-export const TicketList = ({ items, isAssigned }: TicketListProps ) => {
+export const TicketList = ({ items, isRequested }: TicketListProps ) => {
   const { t } = useTranslation()
 
   return (
@@ -21,7 +21,7 @@ export const TicketList = ({ items, isAssigned }: TicketListProps ) => {
             {t('common.title')}
           </Styled.TitleHeader>
           <Styled.Header>
-            {t(isAssigned ? 'ticketList.assignee' : 'ticketList.requester')}
+            {t(isRequested ? 'ticketList.requester' : 'ticketList.assignee')}
           </Styled.Header>
           <Styled.SecondaryContainer>
             <Styled.Header>

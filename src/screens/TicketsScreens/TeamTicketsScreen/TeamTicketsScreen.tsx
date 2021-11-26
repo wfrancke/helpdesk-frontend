@@ -4,6 +4,7 @@ import { Text, ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import { TeamMemberTicketsArea } from '../../../components/data/TeamMemberTicketsArea/TeamMemberTicketsArea'
 import { theme } from '../../../themes'
 import * as Styled from '../TicketsScreen.styles'
 
@@ -120,6 +121,13 @@ export const TeamTicketsScreen = () => {
             />
           </Menu>
         </Styled.ActionsContainer>
+        {placeholderTeam.map((member) => (
+          <TeamMemberTicketsArea
+            key={member.id}
+            name={member.name}
+            items={member.tickets}
+          />
+        ))}
       </Styled.RootContainer>
     </ScrollView>
   )
