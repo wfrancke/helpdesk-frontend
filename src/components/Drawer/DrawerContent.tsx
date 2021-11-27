@@ -66,7 +66,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='account-circle' {...props} />}
             label={t('drawer.account')}
-            onPress={() => props.navigation.navigate('MyTickets')}
+            onPress={() => props.navigation.navigate('Account')}
             focused={props.state.history.length === 5}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}

@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useNavigation } from '@react-navigation/native'
 import { Text, ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { theme } from '../../../themes'
+import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TicketList } from '../../../components/data/TicketList/TicketList'
 import * as Styled from '../TicketsScreen.styles'
 
@@ -52,6 +52,11 @@ export const MyTicketsScreen = () => {
     console.log('Submit')
   }
 
+  const handleSortChange = (value: string) => {
+    setSelectedMenuItem(value)
+    setIsMenuOpen(false)
+  }
+
   return (
     <ScrollView>
       <Styled.RootContainer>
@@ -63,57 +68,29 @@ export const MyTicketsScreen = () => {
             label={t('tickets.searchByTitle')}
             mode='outlined'
           />
-          <Menu
+          <MenuSelect
+            label={selectedMenuItem}
             visible={isMenuOpen}
             onDismiss={() => setIsMenuOpen(false)}
-            anchor={
-              <Styled.SortMenuAnchor
-                mode='outlined'
-                uppercase={false}
-                onPress={() => setIsMenuOpen(true)}
-                icon={({ size }) => <Icon name='chevron-down' color={theme.colors.text} size={size}/>}
-                contentStyle={{
-                  flexDirection: 'row-reverse'
-                }}
-              >
-                <Text style={{
-                  color: theme.colors.text,
-                  fontSize: 19
-                }}>
-                  {selectedMenuItem}
-                </Text>
-              </Styled.SortMenuAnchor>
-            }
+            onPress={() => setIsMenuOpen(true)}
           >
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByTitle'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange(t('tickets.sortByTitle'))}
               title={t('tickets.sortByTitle')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByDate'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange(t('tickets.sortByDate'))}
               title={t('tickets.sortByDate')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByPriority'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange(t('tickets.sortByPriority'))}
               title={t('tickets.sortByPriority')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByStatus'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange(t('tickets.sortByStatus'))}
               title={t('tickets.sortByStatus')}
             />
-          </Menu>
+          </MenuSelect>
           <Styled.SubmitButton
             mode='contained'
             uppercase={false}

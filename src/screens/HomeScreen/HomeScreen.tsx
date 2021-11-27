@@ -7,12 +7,14 @@ import { MyTicketsScreen } from '../TicketsScreens/MyTicketsScreen/MyTicketsScre
 import { AssignedTicketsScreen } from '../TicketsScreens/AssignedTicketsScreen/AssignedTicketsScreen'
 import { TeamTicketsScreen } from '../TicketsScreens/TeamTicketsScreen/TeamTicketsScreen'
 import { TicketDetailsScreen } from '../TicketDetailsScreen/TicketDetailsScreen'
+import { AccountScreen } from '../AccountScreen/AccountScreen'
 
 export type DrawerParamList = {
   MyTickets: undefined,
   AssignedTickets: undefined,
   TeamTickets: undefined,
-  TicketDetails: { ticketId: number }
+  TicketDetails: { ticketId: number },
+  Account: undefined,
 }
 
 const Drawer = createDrawerNavigator<DrawerParamList>()
@@ -35,6 +37,7 @@ export const HomeScreen = () => {
         component={TicketDetailsScreen}
         initialParams={{ ticketId: 0 }}
       />
+      <Drawer.Screen name='Account' component={AccountScreen} />
     </Drawer.Navigator>
   )
 }
