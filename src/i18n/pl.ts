@@ -5,6 +5,8 @@ export default {
       lastName: 'Nazwisko',
       email: 'Email',
       password: 'Hasło',
+      username: 'Nazwa użytkownika',
+      phoneNumber: 'Numer telefonu',
       submit: 'Utwórz',
       title: 'Tytuł',
       priority: 'Priorytet',
@@ -43,6 +45,15 @@ export default {
     ticketList: {
       requester: 'Zgłaszający',
       assignee: 'Przypisany',
+    },
+    account: {
+      editDetails: 'Edytuj dane konta',
+      editLang: 'Zmień język',
+      editPass: 'Zmień hasło',
+      assign: 'Zapisz do zespołu',
+      english: 'Angielski',
+      polish: 'Polski',
+      repeatPass: 'Powtórz hasło'
     },
   }
 }

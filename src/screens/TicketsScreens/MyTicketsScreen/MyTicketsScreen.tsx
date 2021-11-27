@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigation } from '@react-navigation/native'
-import { Text, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { theme } from '../../../themes'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
@@ -48,7 +49,7 @@ export const MyTicketsScreen = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('tickets.sortByTitle'))
 
   const handleSubmitTicket = () => {
-    //navigation.navigate('Submit ticket')
+    //navigation.navigate('SubmitTicket')
     console.log('Submit')
   }
 
@@ -92,14 +93,10 @@ export const MyTicketsScreen = () => {
             />
           </MenuSelect>
           <Styled.SubmitButton
-            mode='contained'
-            uppercase={false}
             onPress={handleSubmitTicket}
-          >
-            <Text style={{color: theme.colors.background, fontSize: 19}}>
-              {t('common.submit')}
-            </Text>
-          </Styled.SubmitButton>
+            icon={() => <Icon name='plus' color={theme.colors.background} size={22} />}
+            label={t('common.submit')}
+          />
         </Styled.ActionsContainer>
         <TicketList
           items={placeholderData}

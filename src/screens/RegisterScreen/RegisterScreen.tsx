@@ -35,7 +35,7 @@ export const RegisterScreen = () => {
         label={t('common.email')}
         mode='outlined'
       />
-      <View style={{margin: 20}}>
+      <View style={{margin: 30}}>
         <Styled.LoginInput
           label={t('common.password')}
           mode='outlined'
@@ -46,14 +46,9 @@ export const RegisterScreen = () => {
         />
       </View>
       <Styled.LoginButton
-        mode='contained'
-        uppercase={false}
         onPress={() => console.log('halo')}
-      >
-        <Text style={{color: theme.colors.background, fontSize: 19}}>
-          {t('register.register')}
-        </Text>
-      </Styled.LoginButton>
+        label={t('register.register')}
+      />
       <Link to={{ screen: 'Login'}}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <Text style={{color: theme.colors.text}}>{t('register.alreadyAccount')}</Text>

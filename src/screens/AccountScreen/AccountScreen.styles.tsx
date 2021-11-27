@@ -1,9 +1,14 @@
 import styled from '@emotion/native'
-import { Title, TextInput, Button } from 'react-native-paper'
+import { Title, TextInput } from 'react-native-paper'
+import { isMobile } from 'react-device-detect'
+
+import { Button } from '../../components/Button/Button'
 
 const RootContainer = styled.View`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${isMobile === false ? 'row' : 'column'};
+  justify-content: center;
+  margin-top: 20px;
 `
 
 const ColumnContainer = styled.View`
@@ -21,20 +26,17 @@ const SectionTitle = styled(Title)`
   font-weight: bold;
   font-size: 36px;
   line-height: 36px;
+  margin-bottom: 25px;
 `
 
 const StyledTextInput = styled(TextInput)`
-  margin: 5px;
+  margin: 5px 0;
   width: 300px;
   height: 50px;
 `
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
-  width: 300px;
-  height: 50px;
-  justify-content: center;
-  border-radius: 15px;
 `
 
 export {

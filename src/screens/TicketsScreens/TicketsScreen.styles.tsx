@@ -1,6 +1,7 @@
 import styled from '@emotion/native'
-import { Title, TextInput, Button } from 'react-native-paper'
+import { Title, TextInput, Button as PaperButton } from 'react-native-paper'
 
+import { Button } from '../../components/Button/Button'
 import { theme } from '../../themes'
 
 const RootContainer = styled.View`
@@ -32,7 +33,7 @@ const SearchInput = styled(TextInput)`
   margin-top: 5px;
 `
 
-const SortMenuAnchor = styled(Button)`
+const SortMenuAnchor = styled(PaperButton)`
   height: 50px;
   width: 260px;
   justify-content: center;
@@ -42,10 +43,6 @@ const SortMenuAnchor = styled(Button)`
 `
 
 const SubmitButton = styled(Button)`
-  height: 50px;
-  width: 260px;
-  justify-content: center;
-  border-radius: 15px;
   margin: 10px;
 `
 

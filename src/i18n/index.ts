@@ -1,9 +1,9 @@
-import i18n from 'i18next'
+import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import pl from './pl'
 import en from './en'
 
-i18n
+i18next
   .use(initReactI18next)
   .init({
     detection: {
@@ -21,4 +21,4 @@ i18n
     },
   })
 
-export default i18n
+export default i18next

@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button } from 'react-native-paper'
-import { isMobile } from 'react-device-detect'
 
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
@@ -41,18 +40,14 @@ export const LoginScreen = () => {
         color={theme.colors.text}
         uppercase={false}
         onPress={() => console.log('forgot')}
+        style={{ marginBottom: 50 }}
       >
         {t('login.forgot')}
       </Button>
       <Styled.LoginButton
-        mode='contained'
-        uppercase={false}
         onPress={handleLogin}
-      >
-        <Text style={{color: theme.colors.background, fontSize: 19}}>
-          {t('login.login')}
-        </Text>
-      </Styled.LoginButton>
+        label={t('login.login')}
+      />
       <Link to={{ screen: 'Register' }}>
         <View style={{flexDirection: 'row', margin: 10}}>
           <Text style={{color: theme.colors.text}}>{t('login.noAccount')}</Text>

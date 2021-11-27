@@ -1,5 +1,7 @@
 import styled from '@emotion/native'
-import { Title, TextInput, Button } from 'react-native-paper'
+import { Title, TextInput } from 'react-native-paper'
+
+import { Button } from '../../components/Button/Button'
 
 const RootContainer = styled.View`
   display: flex;
@@ -27,10 +29,6 @@ const LoginInput = styled(TextInput)`
 
 const LoginButton = styled(Button)`
   margin: 50px 0 0 0;
-  width: 300px;
-  height: 50px;
-  justify-content: center;
-  border-radius: 15px;
 `
 
 export {
