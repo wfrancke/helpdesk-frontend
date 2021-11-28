@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigation } from '@react-navigation/native'
 import { ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -15,38 +14,37 @@ const placeholderData = [
     id: 1,
     title: 'Sample title for assignment',
     name: 'Sample Assignee Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 2,
     title: 'Sample Title2',
     name: 'Sample Assignee Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 3,
     title: 'Sample Title3',
     name: 'Sample Assignee Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 4,
     title: 'Sample Title4',
     name: 'Sample Assignee Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
 ]
 
 export const MyTicketsScreen = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('tickets.sortByTitle'))
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
 
   const handleSubmitTicket = () => {
     //navigation.navigate('SubmitTicket')
@@ -70,32 +68,32 @@ export const MyTicketsScreen = () => {
             mode='outlined'
           />
           <MenuSelect
-            label={selectedMenuItem}
+            label={t(`tickets.sortBy${selectedMenuItem}`)}
             visible={isMenuOpen}
             onDismiss={() => setIsMenuOpen(false)}
             onPress={() => setIsMenuOpen(true)}
           >
             <Menu.Item
-              onPress={() => handleSortChange(t('tickets.sortByTitle'))}
+              onPress={() => handleSortChange('Title')}
               title={t('tickets.sortByTitle')}
             />
             <Menu.Item
-              onPress={() => handleSortChange(t('tickets.sortByDate'))}
+              onPress={() => handleSortChange('Date')}
               title={t('tickets.sortByDate')}
             />
             <Menu.Item
-              onPress={() => handleSortChange(t('tickets.sortByPriority'))}
+              onPress={() => handleSortChange('Priority')}
               title={t('tickets.sortByPriority')}
             />
             <Menu.Item
-              onPress={() => handleSortChange(t('tickets.sortByStatus'))}
+              onPress={() => handleSortChange('Status')}
               title={t('tickets.sortByStatus')}
             />
           </MenuSelect>
           <Styled.SubmitButton
             onPress={handleSubmitTicket}
             icon={() => <Icon name='plus' color={theme.colors.background} size={22} />}
-            label={t('common.submit')}
+            label={t('tickets.submit')}
           />
         </Styled.ActionsContainer>
         <TicketList

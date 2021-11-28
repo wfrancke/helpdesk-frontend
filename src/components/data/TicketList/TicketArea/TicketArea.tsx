@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 import * as Styled from './TicketArea.styles'
 
@@ -16,6 +17,8 @@ interface TicketAreaProps {
 }
 
 export const TicketArea = ({ values }: TicketAreaProps) => {
+  const { t } = useTranslation()
+
   const title = values.title.length >= 20
     ? values.title.substr(0, 16) + '...'
     : values.title
@@ -33,10 +36,10 @@ export const TicketArea = ({ values }: TicketAreaProps) => {
         </Styled.Text>
         <Styled.SecondaryContainer>
           <Styled.Text>
-            {values.priority}
+            {t(`ticketList.${values.priority}`)}
           </Styled.Text>
           <Styled.Text>
-            {values.status}
+            {t(`ticketList.${values.status}`)}
           </Styled.Text>
         </Styled.SecondaryContainer>
       </Styled.RootContainer>

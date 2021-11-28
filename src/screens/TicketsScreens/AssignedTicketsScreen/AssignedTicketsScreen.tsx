@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { theme } from '../../../themes'
+import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TicketList } from '../../../components/data/TicketList/TicketList'
 import * as Styled from '../TicketsScreen.styles'
 
@@ -13,29 +12,29 @@ const placeholderData = [
     id: 1,
     title: 'Sample Title1',
     name: 'Sample Requester Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 2,
     title: 'Sample Title2',
     name: 'Sample Requester Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 3,
     title: 'Sample Title3',
     name: 'Sample Requester Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
   {
     id: 4,
     title: 'Sample Title4',
     name: 'Sample Requester Name',
-    priority: 'Critical',
-    status: 'Closed'
+    priority: 'critical',
+    status: 'closed'
   },
 ]
 
@@ -43,7 +42,12 @@ export const AssignedTicketsScreen = () => {
   const { t } = useTranslation()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('tickets.sortByTitle'))
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
+
+  const handleSortChange = (value: string) => {
+    setSelectedMenuItem(value)
+    setIsMenuOpen(false)
+  }
 
   return (
     <ScrollView>
@@ -56,57 +60,29 @@ export const AssignedTicketsScreen = () => {
             label={t('tickets.searchByTitle')}
             mode='outlined'
           />
-          <Menu
+          <MenuSelect
+            label={t(`tickets.sortBy${selectedMenuItem}`)}
             visible={isMenuOpen}
             onDismiss={() => setIsMenuOpen(false)}
-            anchor={
-              <Styled.SortMenuAnchor
-                mode='outlined'
-                uppercase={false}
-                onPress={() => setIsMenuOpen(true)}
-                icon={({ size }) => <Icon name='chevron-down' color={theme.colors.text} size={size}/>}
-                contentStyle={{
-                  flexDirection: 'row-reverse'
-                }}
-              >
-                <Text style={{
-                  color: theme.colors.text,
-                  fontSize: 19
-                }}>
-                  {selectedMenuItem}
-                </Text>
-              </Styled.SortMenuAnchor>
-            }
+            onPress={() => setIsMenuOpen(true)}
           >
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByTitle'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange('Title')}
               title={t('tickets.sortByTitle')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByDate'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange('Date')}
               title={t('tickets.sortByDate')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByPriority'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange('Priority')}
               title={t('tickets.sortByPriority')}
             />
             <Menu.Item
-              onPress={() => {
-                setSelectedMenuItem(t('tickets.sortByStatus'))
-                setIsMenuOpen(false)
-              }}
+              onPress={() => handleSortChange('Status')}
               title={t('tickets.sortByStatus')}
             />
-          </Menu>
+          </MenuSelect>
         </Styled.ActionsContainer>
         <TicketList
           items={placeholderData}

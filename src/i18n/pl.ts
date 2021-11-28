@@ -7,7 +7,7 @@ export default {
       password: 'Hasło',
       username: 'Nazwa użytkownika',
       phoneNumber: 'Numer telefonu',
-      submit: 'Utwórz',
+      submit: 'Zatwierdź',
       title: 'Tytuł',
       priority: 'Priorytet',
       status: 'Status'
@@ -38,13 +38,19 @@ export default {
       teamTickets: 'Zgłoszenia zespołu',
       searchByTitle: 'Szukaj wg tytułu',
       sortByDate: 'Sortuj wg daty',
-      sortByName: 'Sortuj wg nazwy',
+      sortByTitle: 'Sortuj wg tytułu',
       sortByPriority: 'Sortuj wg priorytetu',
-      sortByStatus: 'Sortuj wg statusu'
+      sortByStatus: 'Sortuj wg statusu',
+      submit: 'Utwórz'
     },
     ticketList: {
       requester: 'Zgłaszający',
       assignee: 'Przypisany',
+      critical: 'Krytyczny',
+      high: 'Wysoki',
+      low: 'Niski',
+      closed: 'Zamknięte',
+      open: 'Otwarte'
     },
     account: {
       editDetails: 'Edytuj dane konta',

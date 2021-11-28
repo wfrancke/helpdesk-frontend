@@ -7,7 +7,7 @@ import { Button } from '../../components/Button/Button'
 const RootContainer = styled.View`
   display: flex;
   flex-direction: ${isMobile === false ? 'row' : 'column'};
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 20px;
 `
 

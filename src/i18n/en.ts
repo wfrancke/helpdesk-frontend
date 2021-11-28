@@ -40,11 +40,17 @@ export default {
       sortByDate: 'Sort by date',
       sortByTitle: 'Sort by title',
       sortByPriority: 'Sort by priority',
-      sortByStatus: 'Sort by status'
+      sortByStatus: 'Sort by status',
+      submit: 'Submit'
     },
     ticketList: {
       requester: 'Requester',
       assignee: 'Assignee',
+      critical: 'Critical',
+      high: 'High',
+      low: 'Low',
+      closed: 'Closed',
+      open: 'Open'
     },
     account: {
       editDetails: 'Edit details',

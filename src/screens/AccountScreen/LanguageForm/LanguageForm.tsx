@@ -44,7 +44,7 @@ export const LanguageForm = () => {
       </MenuSelect>
       <Styled.Button
         label={t('common.submit')}
-        onPress={() => handleLanguageChange}
+        onPress={handleLanguageChange}
       />
     </Styled.SectionContainer>
   )
