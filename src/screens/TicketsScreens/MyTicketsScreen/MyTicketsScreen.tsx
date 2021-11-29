@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Menu } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/core'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { theme } from '../../../themes'
@@ -42,13 +43,13 @@ const placeholderData = [
 
 export const MyTicketsScreen = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
 
   const handleSubmitTicket = () => {
-    //navigation.navigate('SubmitTicket')
-    console.log('Submit')
+    navigation.navigate('CreateTicket')
   }
 
   const handleSortChange = (value: string) => {

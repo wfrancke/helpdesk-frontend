@@ -10,7 +10,8 @@ export default {
       submit: 'Submit',
       title: 'Title',
       priority: 'Priority',
-      status: 'Status'
+      status: 'Status',
+      send: 'Send'
     },
     drawer: {
       myTickets: 'My tickets',

@@ -10,7 +10,8 @@ export default {
       submit: 'Zatwierdź',
       title: 'Tytuł',
       priority: 'Priorytet',
-      status: 'Status'
+      status: 'Status',
+      send: 'Wyślij'
     },
     drawer: {
       myTickets: 'Moje zgłoszenia',

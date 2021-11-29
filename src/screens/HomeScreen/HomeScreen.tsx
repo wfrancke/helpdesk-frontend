@@ -6,6 +6,7 @@ import { DrawerContent } from '../../components/Drawer/DrawerContent'
 import { MyTicketsScreen } from '../TicketsScreens/MyTicketsScreen/MyTicketsScreen'
 import { AssignedTicketsScreen } from '../TicketsScreens/AssignedTicketsScreen/AssignedTicketsScreen'
 import { TeamTicketsScreen } from '../TicketsScreens/TeamTicketsScreen/TeamTicketsScreen'
+import { CreateTicketScreen } from '../CreateTicketScreen/CreateTicketScreen'
 import { TicketDetailsScreen } from '../TicketDetailsScreen/TicketDetailsScreen'
 import { AccountScreen } from '../AccountScreen/AccountScreen'
 
@@ -13,6 +14,7 @@ export type DrawerParamList = {
   MyTickets: undefined,
   AssignedTickets: undefined,
   TeamTickets: undefined,
+  CreateTicket: undefined,
   TicketDetails: { ticketId: number },
   Account: undefined,
 }
@@ -32,6 +34,7 @@ export const HomeScreen = () => {
       <Drawer.Screen name='MyTickets' component={MyTicketsScreen} />
       <Drawer.Screen name='AssignedTickets' component={AssignedTicketsScreen} />
       <Drawer.Screen name='TeamTickets' component={TeamTicketsScreen} />
+      <Drawer.Screen name='CreateTicket' component={CreateTicketScreen} />
       <Drawer.Screen
         name='TicketDetails'
         component={TicketDetailsScreen}
