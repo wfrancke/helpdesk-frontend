@@ -1,4 +1,5 @@
 import React from 'react'
+import { ScrollView } from 'react-native'
 import { Link } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -9,11 +10,13 @@ import * as Styled from './CreateTicketScreen.styles'
 export const CreateTicketScreen = () => {
 
   return (
-    <Styled.RootContainer>
-      <Link to={{ screen: 'MyTickets' }}>
-        <Icon name='arrow-left' color={theme.colors.text} size={40} />
-      </Link>
-      <TicketForm />
-    </Styled.RootContainer>
+    <ScrollView>
+      <Styled.RootContainer>
+        <Link to={{ screen: 'MyTickets' }}>
+          <Icon name='arrow-left' color={theme.colors.text} size={40} />
+        </Link>
+        <TicketForm />
+      </Styled.RootContainer>
+    </ScrollView>
   )
 }

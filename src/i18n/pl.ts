@@ -9,9 +9,11 @@ export default {
       phoneNumber: 'Numer telefonu',
       submit: 'Zatwierdź',
       title: 'Tytuł',
+      description: 'Opis',
       priority: 'Priorytet',
       status: 'Status',
-      send: 'Wyślij'
+      send: 'Wyślij',
+      tags: 'Tagi'
     },
     drawer: {
       myTickets: 'Moje zgłoszenia',
@@ -42,7 +44,8 @@ export default {
       sortByTitle: 'Sortuj wg tytułu',
       sortByPriority: 'Sortuj wg priorytetu',
       sortByStatus: 'Sortuj wg statusu',
-      submit: 'Utwórz'
+      submit: 'Utwórz',
+      addTag: 'Dodaj tag',
     },
     ticketList: {
       requester: 'Zgłaszający',
