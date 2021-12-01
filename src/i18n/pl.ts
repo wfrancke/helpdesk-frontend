@@ -13,7 +13,11 @@ export default {
       priority: 'Priorytet',
       status: 'Status',
       send: 'Wyślij',
-      tags: 'Tagi'
+      edit: 'Edytuj',
+      tags: 'Tagi',
+      filingDate: 'Data zgłoszenia',
+      finishDate: 'Data wykonania',
+      comments: 'Komentarze',
     },
     drawer: {
       myTickets: 'Moje zgłoszenia',

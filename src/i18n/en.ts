@@ -13,7 +13,11 @@ export default {
       priority: 'Priority',
       status: 'Status',
       send: 'Send',
+      edit: 'Edit',
       tags: 'Tags',
+      filingDate: 'Filing date',
+      finishDate: 'Finish date',
+      comments: 'Comments',
     },
     drawer: {
       myTickets: 'My tickets',
