@@ -4,6 +4,8 @@ import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
+import { useSignInMutation } from '../../api/auth/auth'
+import { useSetToken } from '../../providers/AuthProvider'
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
 import * as Styled from './LoginScreen.styles'
@@ -11,6 +13,7 @@ import * as Styled from './LoginScreen.styles'
 export const LoginScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const setToken = useSetToken()
 
   const styles = StyleSheet.create({
     rootContainer: {
@@ -18,7 +21,18 @@ export const LoginScreen = () => {
     },
   })
 
+  const { mutate } = useSignInMutation({
+    onSuccess: async ({ accessToken: newAccessToken }) => {
+      console.log(newAccessToken)
+      setToken(newAccessToken)
+    },
+    onError: () => {
+      console.log('error')
+    }
+  })
+
   const handleLogin = () => {
+    mutate({ email: 'user@gmail.com', password: 'qwer1234' })
     navigation.navigate('Home')
   }
 

@@ -5,6 +5,7 @@ import { Menu } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/core'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import { useUserAccessToken } from '../../../providers/AuthProvider'
 import { theme } from '../../../themes'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TicketList } from '../../../components/data/TicketList/TicketList'
@@ -44,12 +45,14 @@ const placeholderData = [
 export const MyTicketsScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const token = useUserAccessToken()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
 
   const handleSubmitTicket = () => {
-    navigation.navigate('CreateTicket')
+    console.log(token)
+    // navigation.navigate('CreateTicket')
   }
 
   const handleSortChange = (value: string) => {
