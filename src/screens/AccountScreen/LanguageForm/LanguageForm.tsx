@@ -10,8 +10,6 @@ export const LanguageForm = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedLanguage, setSelectedLanguage] = useState<string>(i18n.language)
 
-  console.log(i18n.language)
-
   const handleLanguageChange = () => {
     i18n.changeLanguage(selectedLanguage)
   }

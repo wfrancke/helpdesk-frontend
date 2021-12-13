@@ -2,39 +2,56 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
-import { Button } from 'react-native-paper'
+import { Button, HelperText } from 'react-native-paper'
+import { useFormik } from 'formik'
 
 import { useSignInMutation } from '../../api/auth/auth'
 import { useSetToken } from '../../providers/AuthProvider'
+import { loginSchema } from '../../schemas/loginSchema'
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
 import * as Styled from './LoginScreen.styles'
+
+interface LoginFields {
+  email: string
+  password: string
+}
 
 export const LoginScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const setToken = useSetToken()
 
+  const { mutate } = useSignInMutation({
+    onSuccess: async ({ accessToken: newAccessToken }) => {
+      setToken(newAccessToken)
+      navigation.navigate('Home')
+    },
+  })
+
+  
+  const onSubmit = (values: LoginFields) => {
+    mutate({ email: values.email, password: values.password })
+  }
+
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+  } = useFormik<LoginFields>({
+    initialValues: { email: '', password: '' },
+    validationSchema: loginSchema,
+    onSubmit,
+  })
+
+
   const styles = StyleSheet.create({
     rootContainer: {
       height: Dimensions.get('window').height
     },
   })
-
-  const { mutate } = useSignInMutation({
-    onSuccess: async ({ accessToken: newAccessToken }) => {
-      console.log(newAccessToken)
-      setToken(newAccessToken)
-    },
-    onError: () => {
-      console.log('error')
-    }
-  })
-
-  const handleLogin = () => {
-    mutate({ email: 'user@gmail.com', password: 'qwer1234' })
-    navigation.navigate('Home')
-  }
 
   return (
     <Styled.RootContainer style={styles.rootContainer}>
@@ -45,11 +62,31 @@ export const LoginScreen = () => {
       <Styled.LoginInput
         label={t('login.username')}
         mode='outlined'
+        value={values.email}
+        onChangeText={handleChange('email')}
+        onBlur={handleBlur('email')}
+        error={!!errors.email}
       />
+      <HelperText 
+        type='error'
+        visible={!!errors.email}
+      >
+        {t(errors.email || '')}
+      </HelperText>
       <Styled.LoginInput
         label={t('common.password')}
         mode='outlined'
+        value={values.password}
+        onChangeText={handleChange('password')}
+        onBlur={handleBlur('password')}
+        error={!!errors.password}
       />
+      <HelperText 
+        type='error'
+        visible={!!errors.password}
+      >
+        {t(errors.password || '')}
+      </HelperText>
       <Button
         color={theme.colors.text}
         uppercase={false}
@@ -59,7 +96,7 @@ export const LoginScreen = () => {
         {t('login.forgot')}
       </Button>
       <Styled.LoginButton
-        onPress={handleLogin}
+        onPress={handleSubmit}
         label={t('login.login')}
       />
       <Link to={{ screen: 'Register' }}>

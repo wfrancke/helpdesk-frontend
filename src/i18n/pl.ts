@@ -18,6 +18,26 @@ export default {
       filingDate: 'Data zgłoszenia',
       finishDate: 'Data wykonania',
       comments: 'Komentarze',
+      errors: {
+        firstName: {
+          required: 'Imię jest wymagane'
+        },
+        lastName: {
+          required: 'Nazwisko jest wymagane'
+        },
+        email: {
+          format: 'Niepoprawny format emaila',
+          required: 'Email jest wymagany',
+        },
+        password: {
+          min: 'Przynajmniej 8 znaków długości wymagane',
+          required: 'Hasło jest wymagane'
+        },
+        confirmPassword: {
+          dontMatch: 'Hasła się nie pokrywają',
+          required: 'Powtórzenie hasła wymagane'
+        },
+      }
     },
     drawer: {
       myTickets: 'Moje zgłoszenia',

@@ -2,14 +2,47 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
-import { Button } from 'react-native-paper'
+import { HelperText } from 'react-native-paper'
+import { useFormik } from 'formik'
 
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
+import { registerSchema } from '../../schemas/registerSchema'
 import * as Styled from './RegisterScreen.styles'
+import { conforms } from 'lodash'
+
+interface RegisterFields {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
 export const RegisterScreen = () => {
   const { t } = useTranslation()
+
+  const onSubmit = (values: RegisterFields) => {
+    console.log(values)
+  }
+
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+  } = useFormik<RegisterFields>({
+    initialValues: { 
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: registerSchema,
+    onSubmit,
+  })
 
   const styles = StyleSheet.create({
     rootContainer: {
@@ -26,27 +59,77 @@ export const RegisterScreen = () => {
       <Styled.LoginInput
         label={t('common.firstName')}
         mode='outlined'
+        value={values.firstName}
+        onChangeText={handleChange('firstName')}
+        onBlur={handleBlur('firstName')}
+        error={!!errors.firstName}
       />
+      <HelperText 
+        type='error'
+        visible={!!errors.firstName}
+      >
+        {t(errors.firstName || '')}
+      </HelperText>
       <Styled.LoginInput
         label={t('common.lastName')}
         mode='outlined'
+        value={values.lastName}
+        onChangeText={handleChange('lastName')}
+        onBlur={handleBlur('lastName')}
+        error={!!errors.lastName}
       />
+      <HelperText 
+        type='error'
+        visible={!!errors.lastName}
+      >
+        {t(errors.lastName || '')}
+      </HelperText>
       <Styled.LoginInput
         label={t('common.email')}
         mode='outlined'
+        value={values.email}
+        onChangeText={handleChange('email')}
+        onBlur={handleBlur('email')}
+        error={!!errors.email}
       />
+      <HelperText 
+        type='error'
+        visible={!!errors.email}
+      >
+        {t(errors.email || '')}
+      </HelperText>
       <View style={{margin: 30}}>
         <Styled.LoginInput
           label={t('common.password')}
           mode='outlined'
+          value={values.password}
+          onChangeText={handleChange('password')}
+          onBlur={handleBlur('password')}
+          error={!!errors.password}
         />
+        <HelperText 
+          type='error'
+          visible={!!errors.password}
+        >
+          {t(errors.password || '')}
+        </HelperText>
         <Styled.LoginInput
           label={t('register.repeatPassword')}
           mode='outlined'
+          value={values.confirmPassword}
+          onChangeText={handleChange('confirmPassword')}
+          onBlur={handleBlur('confirmPassword')}
+          error={!!errors.confirmPassword}
         />
+        <HelperText 
+          type='error'
+          visible={!!errors.confirmPassword}
+        >
+          {t(errors.confirmPassword || '')}
+        </HelperText>
       </View>
       <Styled.LoginButton
-        onPress={() => console.log('halo')}
+        onPress={handleSubmit}
         label={t('register.register')}
       />
       <Link to={{ screen: 'Login'}}>

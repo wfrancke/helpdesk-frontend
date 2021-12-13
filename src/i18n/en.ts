@@ -18,6 +18,26 @@ export default {
       filingDate: 'Filing date',
       finishDate: 'Finish date',
       comments: 'Comments',
+      errors: {
+        firstName: {
+          required: 'First name is required'
+        },
+        lastName: {
+          required: 'Last name is required'
+        },
+        email: {
+          format: 'Incorrect email format',
+          required: 'Email is required',
+        },
+        password: {
+          min: '8 characters minimum',
+          required: 'Password is required'
+        },
+        confirmPassword: {
+          dontMatch: 'Passwords don\'t match',
+          required: 'Confirmation required'
+        },
+      }
     },
     drawer: {
       myTickets: 'My tickets',
@@ -31,7 +51,7 @@ export default {
       login: 'Login',
       username: 'Username or E-mail',
       forgot: 'Forgot password?',
-      noAccount: 'Don\'t have an account? '
+      noAccount: 'Don\'t have an account? ',
     },
     register: {
       createAccount: 'Create Account',

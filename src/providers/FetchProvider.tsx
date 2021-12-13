@@ -9,7 +9,7 @@ const useFetchHelper = () => {
 
   const fetch = useMemo(() => {
     const instance = Axios.create({
-      baseURL: 'http://localhost:3000/'
+      baseURL: 'http://192.168.1.4:3000/'
     })
     return instance
   }, [])
