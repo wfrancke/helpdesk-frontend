@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from '@react-navigation/native'
+import { Link, useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import { HelperText } from 'react-native-paper'
 import { useFormik } from 'formik'
@@ -8,8 +8,8 @@ import { useFormik } from 'formik'
 import { theme } from '../../themes'
 import logo from '../../../assets/logo.png'
 import { registerSchema } from '../../schemas/registerSchema'
+import { useSignUpMutation } from '../../api/users/users'
 import * as Styled from './RegisterScreen.styles'
-import { conforms } from 'lodash'
 
 interface RegisterFields {
   firstName: string
@@ -21,9 +21,14 @@ interface RegisterFields {
 
 export const RegisterScreen = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  const { mutate } = useSignUpMutation({
+    onSuccess: () => navigation.navigate('Login')
+  })
 
   const onSubmit = (values: RegisterFields) => {
-    console.log(values)
+    mutate(values)
   }
 
   const {
@@ -106,6 +111,7 @@ export const RegisterScreen = () => {
           onChangeText={handleChange('password')}
           onBlur={handleBlur('password')}
           error={!!errors.password}
+          secureTextEntry={true}
         />
         <HelperText 
           type='error'
@@ -120,6 +126,7 @@ export const RegisterScreen = () => {
           onChangeText={handleChange('confirmPassword')}
           onBlur={handleBlur('confirmPassword')}
           error={!!errors.confirmPassword}
+          secureTextEntry={true}
         />
         <HelperText 
           type='error'

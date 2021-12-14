@@ -80,6 +80,7 @@ export const LoginScreen = () => {
         onChangeText={handleChange('password')}
         onBlur={handleBlur('password')}
         error={!!errors.password}
+        secureTextEntry={true}
       />
       <HelperText 
         type='error'

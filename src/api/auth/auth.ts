@@ -2,15 +2,7 @@ import { useMutation, UseMutationOptions, UseMutationResult } from 'react-query'
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-
-interface SignInValues {
-  email: string,
-  password: string
-}
-
-interface SignInResponse {
-  accessToken: string
-}
+import { SignInResponse, SignInValues } from './types'
 
 const postSignIn = async (
   instance: AxiosInstance,

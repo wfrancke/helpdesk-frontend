@@ -1,10 +1,13 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useProfileQuery } from '../../../api/users/users'
 
 import * as Styled from '../AccountScreen.styles'
 
 export const AccountDetailsForm = () => {
   const { t } = useTranslation()
+
+  const { data } = useProfileQuery()
 
   return (
     <Styled.SectionContainer>
@@ -14,14 +17,17 @@ export const AccountDetailsForm = () => {
       <Styled.TextInput
         label={t('common.firstName')}
         mode='outlined'
+        value={data?.firstName || ''}
       />
       <Styled.TextInput
         label={t('common.lastName')}
         mode='outlined'
+        value={data?.lastName || ''}
       />
       <Styled.TextInput
         label={t('common.email')}
         mode='outlined'
+        value={data?.email || ''}
       />
       <Styled.TextInput
         label={t('common.phoneNumber')}
