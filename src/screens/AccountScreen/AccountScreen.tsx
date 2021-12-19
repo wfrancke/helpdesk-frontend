@@ -12,7 +12,7 @@ export const AccountScreen = () => {
     <ScrollView>
       <Styled.RootContainer>
         <Styled.ColumnContainer>
-          <AccountDetailsForm />
+          <AccountDetailsForm/>
           <LanguageForm />
         </Styled.ColumnContainer>
         <Styled.ColumnContainer>

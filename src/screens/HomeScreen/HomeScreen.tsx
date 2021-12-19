@@ -9,6 +9,8 @@ import { TeamTicketsScreen } from '../TicketsScreens/TeamTicketsScreen/TeamTicke
 import { CreateTicketScreen } from '../CreateTicketScreen/CreateTicketScreen'
 import { TicketDetailsScreen } from '../TicketDetailsScreen/TicketDetailsScreen'
 import { AccountScreen } from '../AccountScreen/AccountScreen'
+import { useSetRole, useUserAccessToken } from '../../providers/AuthProvider'
+import { useProfileQuery } from '../../api/users/users'
 
 export type DrawerParamList = {
   MyTickets: undefined,
@@ -22,6 +24,14 @@ export type DrawerParamList = {
 const Drawer = createDrawerNavigator<DrawerParamList>()
 
 export const HomeScreen = () => {
+  const accessToken = useUserAccessToken()
+  const setRole = useSetRole()
+
+  useProfileQuery({
+    enabled: !!accessToken,
+    onSuccess: ({ role }) => setRole(role)
+  })
+
   return (
     <Drawer.Navigator
       initialRouteName='MyTickets'

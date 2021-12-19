@@ -5,6 +5,7 @@ import { View, Dimensions } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 import logo from '../../../assets/logoWhite.png'
+import { useRole } from '../../hooks/useRole'
 import { theme } from '../../themes'
 import * as Styled from './DrawerContent.styles'
 
@@ -33,36 +34,42 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
             inactiveTintColor={theme.colors.secondary}
             activeTintColor={theme.colors.primary}
           />
-          <Styled.DrawerItem
-            icon={(props) => <Icon name='at' {...props} />}
-            label={t('drawer.assignedTickets')}
-            onPress={() => props.navigation.navigate('AssignedTickets')}
-            focused={props.state.history.length === 2}
-            inactiveBackgroundColor={theme.colors.accent}
-            activeBackgroundColor={theme.colors.background}
-            inactiveTintColor={theme.colors.secondary}
-            activeTintColor={theme.colors.primary}
-          />
-          <Styled.DrawerItem
-            icon={(props) => <Icon name='account-group' {...props} />}
-            label={t('drawer.teamTickets')}
-            onPress={() => props.navigation.navigate('TeamTickets')}
-            focused={props.state.history.length === 3}
-            inactiveBackgroundColor={theme.colors.accent}
-            activeBackgroundColor={theme.colors.background}
-            inactiveTintColor={theme.colors.secondary}
-            activeTintColor={theme.colors.primary}
-          />
-          <Styled.DrawerItem
-            icon={(props) => <Icon name='chart-bar' {...props} />}
-            label={t('drawer.statistics')}
-            onPress={() => props.navigation.navigate('MyTickets')}
-            focused={props.state.history.length === 4}
-            inactiveBackgroundColor={theme.colors.accent}
-            activeBackgroundColor={theme.colors.background}
-            inactiveTintColor={theme.colors.secondary}
-            activeTintColor={theme.colors.primary}
-          />
+          {(useRole('employee') || useRole('manager')) && (
+            <Styled.DrawerItem
+              icon={(props) => <Icon name='at' {...props} />}
+              label={t('drawer.assignedTickets')}
+              onPress={() => props.navigation.navigate('AssignedTickets')}
+              focused={props.state.history.length === 2}
+              inactiveBackgroundColor={theme.colors.accent}
+              activeBackgroundColor={theme.colors.background}
+              inactiveTintColor={theme.colors.secondary}
+              activeTintColor={theme.colors.primary}
+            />
+          )}
+          {useRole('manager') && (
+            <>
+              <Styled.DrawerItem
+                icon={(props) => <Icon name='account-group' {...props} />}
+                label={t('drawer.teamTickets')}
+                onPress={() => props.navigation.navigate('TeamTickets')}
+                focused={props.state.history.length === 3}
+                inactiveBackgroundColor={theme.colors.accent}
+                activeBackgroundColor={theme.colors.background}
+                inactiveTintColor={theme.colors.secondary}
+                activeTintColor={theme.colors.primary}
+              />
+              <Styled.DrawerItem
+                icon={(props) => <Icon name='chart-bar' {...props} />}
+                label={t('drawer.statistics')}
+                onPress={() => props.navigation.navigate('MyTickets')}
+                focused={props.state.history.length === 4}
+                inactiveBackgroundColor={theme.colors.accent}
+                activeBackgroundColor={theme.colors.background}
+                inactiveTintColor={theme.colors.secondary}
+                activeTintColor={theme.colors.primary}
+              />
+            </>
+          )}
           <Styled.DrawerItem
             icon={(props) => <Icon name='account-circle' {...props} />}
             label={t('drawer.account')}

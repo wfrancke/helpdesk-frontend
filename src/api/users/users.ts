@@ -2,7 +2,7 @@ import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryO
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-import { SignUpValues } from './types'
+import { SignUpValues, EditDetailsValues, UserProfileValues } from './types'
 
 const postSignUp = async (
   instance: AxiosInstance,
@@ -12,7 +12,7 @@ const postSignUp = async (
   return data
 }
 
-export const useSignUpMutation = (options: UseMutationOptions<SignUpValues, Error, SignUpValues>)
+export const useSignUpMutation = (options?: UseMutationOptions<SignUpValues, Error, SignUpValues>)
 : UseMutationResult<SignUpValues, Error, SignUpValues> => {
   const { fetch } = useFetch()
   return useMutation('signUp', (values: SignUpValues) => postSignUp(fetch, values), options)
@@ -20,13 +20,32 @@ export const useSignUpMutation = (options: UseMutationOptions<SignUpValues, Erro
 
 const getProfile = async (
   instance: AxiosInstance
-): Promise<SignUpValues> => {
+): Promise<UserProfileValues> => {
   const { data } = await instance.get('/users/profile')
   return data
 }
 
-export const useProfileQuery = (options?: Omit<UseQueryOptions<SignUpValues, unknown>, 'queryKey'>)
-: UseQueryResult<SignUpValues, unknown> => {
+export const useProfileQuery = (options?: Omit<UseQueryOptions<UserProfileValues, unknown>, 'queryKey'>)
+: UseQueryResult<UserProfileValues, unknown> => {
   const { fetch } = useFetch()
   return useQuery('getProfile', () => getProfile(fetch), options)
+}
+
+const putOwnDetails = async (
+  instance: AxiosInstance,
+  values: EditDetailsValues
+): Promise<EditDetailsValues> => {
+  const { data } = await instance.put('users', values)
+  return data
+}
+
+export const useUpdateOwnDetailsMutation = (
+  options?: UseMutationOptions<EditDetailsValues, Error, EditDetailsValues>
+): UseMutationResult<EditDetailsValues, Error, EditDetailsValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    'updateOwnDetails',
+    (values: EditDetailsValues) => putOwnDetails(fetch, values),
+    options
+  )
 }
