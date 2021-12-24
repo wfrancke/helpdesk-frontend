@@ -1,8 +1,19 @@
-import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from 'react-query'
+import { useMutation,
+  UseMutationOptions,
+  UseMutationResult,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult
+} from 'react-query'
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-import { SignUpValues, EditDetailsValues, UserProfileValues } from './types'
+import { SignUpValues,
+  EditDetailsValues,
+  UserProfileValues,
+  EditPasswordValues,
+  TeamAssignmentValues
+} from './types'
 
 const postSignUp = async (
   instance: AxiosInstance,
@@ -46,6 +57,44 @@ export const useUpdateOwnDetailsMutation = (
   return useMutation(
     'updateOwnDetails',
     (values: EditDetailsValues) => putOwnDetails(fetch, values),
+    options
+  )
+}
+
+const putPassword = async (
+  instance: AxiosInstance,
+  values: EditPasswordValues
+): Promise<EditPasswordValues> => {
+  const { data } = await instance.put('users/password', values)
+  return data
+}
+
+export const useUpdatePasswordMutation = (
+  options?: UseMutationOptions<EditPasswordValues, Error, EditPasswordValues>
+): UseMutationResult<EditPasswordValues, Error, EditPasswordValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    'updatePassword',
+    (values: EditPasswordValues) => putPassword(fetch, values),
+    options
+  )
+}
+
+const postTeamAssignment = async (
+  instance: AxiosInstance,
+  values: TeamAssignmentValues
+): Promise<TeamAssignmentValues> => {
+  const { data } = await instance.post('/users/assign', values)
+  return data
+}
+
+export const useTeamAssignmentMutation = (
+  options?: UseMutationOptions<TeamAssignmentValues, Error, TeamAssignmentValues>
+): UseMutationResult<TeamAssignmentValues, Error, TeamAssignmentValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    'assignToTeam',
+    (values: TeamAssignmentValues) => postTeamAssignment(fetch, values),
     options
   )
 }

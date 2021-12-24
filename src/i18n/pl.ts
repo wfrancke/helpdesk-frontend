@@ -85,6 +85,7 @@ export default {
       editLang: 'Zmień język',
       editPass: 'Zmień hasło',
       assign: 'Zapisz do zespołu',
+      placeholder: 'Wybierz zespół',
       english: 'Angielski',
       polish: 'Polski',
       repeatPass: 'Powtórz hasło'

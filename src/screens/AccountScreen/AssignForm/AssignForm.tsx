@@ -1,37 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Menu } from 'react-native-paper'
 
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
+import { useTeamsQuery } from '../../../api/teams/teams'
+import { TeamValues } from '../../../api/teams/types'
+import { useTeamAssignmentMutation } from '../../../api/users/users'
 import * as Styled from '../AccountScreen.styles'
-
-const placeholderTeams = [
-  {
-    id: 1,
-    name: 'Sample team A'
-  },
-  {
-    id: 2,
-    name: 'Sample team B'
-  },
-  {
-    id: 3,
-    name: 'Sample team C'
-  },
-  {
-    id: 4,
-    name: 'Sample team D'
-  },
-  
-]
 
 export const AssignForm = () => {
   const { t } = useTranslation()
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const [selectedTeam, setSelectedTeam] = useState(placeholderTeams[0])
 
-  const handleTeamChange = () => {
-    console.log(selectedTeam)
+  const { mutate } = useTeamAssignmentMutation()
+
+  const { data } = useTeamsQuery()
+
+  const placeholderTeam = {
+    _id: '-',
+    name: t('account.placeholder'),
+    managerId: ''
+  }
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [teams, setTeams] = useState<TeamValues[]>([placeholderTeam])
+  const [selectedTeam, setSelectedTeam] = useState<TeamValues>(placeholderTeam)
+
+  useEffect(() => {
+    setTeams([placeholderTeam].concat(data || []))
+  }, [data])
+
+  const handleTeamChange = (values: TeamValues) => {
+    if (values._id!=='-') {
+      mutate({ teamId: values._id })
+    }
   }
 
   return (
@@ -45,9 +46,9 @@ export const AssignForm = () => {
         onPress={() => setIsMenuOpen(true)}
         label={selectedTeam.name}
       >
-        {placeholderTeams.map((team) => (
+        {teams.map((team) => (
           <Menu.Item
-            key={team.id}
+            key={team._id}
             title={team.name}
             onPress={() => {
               setSelectedTeam(team)
@@ -58,7 +59,7 @@ export const AssignForm = () => {
       </MenuSelect>
       <Styled.Button
         label={t('common.submit')}
-        onPress={handleTeamChange}
+        onPress={() => handleTeamChange(selectedTeam)}
       />
     </Styled.SectionContainer>
   )

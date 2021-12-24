@@ -21,3 +21,11 @@ export interface UserProfileValues {
   phoneNumber: string
   role: Role
 }
+
+export interface EditPasswordValues {
+  password: string
+}
+
+export interface TeamAssignmentValues {
+  teamId: string
+}

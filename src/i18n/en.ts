@@ -85,6 +85,7 @@ export default {
       editLang: 'Change language',
       editPass: 'Change password',
       assign: 'Assign to a team',
+      placeholder: 'Select a team',
       en: 'English',
       pl: 'Polish',
       repeatPass: 'Repeat password'
