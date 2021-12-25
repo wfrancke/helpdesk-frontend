@@ -20,6 +20,7 @@ export interface UserProfileValues {
   email: string
   phoneNumber: string
   role: Role
+  specialty: string[]
 }
 
 export interface EditPasswordValues {
@@ -28,4 +29,8 @@ export interface EditPasswordValues {
 
 export interface TeamAssignmentValues {
   teamId: string
+}
+
+export interface EditSpecialtyValues {
+  specialty: string[]
 }

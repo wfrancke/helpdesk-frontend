@@ -5,71 +5,29 @@ import { Menu } from 'react-native-paper'
 import { MenuSelect } from '../MenuSelect/MenuSelect'
 import { Button } from '../Button/Button'
 import { TagChip } from './TagChip/TagChip'
-import { TagChipInput } from './TagChip/TagChipInput'
 import * as Styled from './TicketForm.styles'
-
-const placeholderTags = [
-  {
-    id: 1,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 2,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 3,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 4,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 5,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 6,
-    name: 'Placeholder tag1',
-  },
-  {
-    id: 7,
-    name: 'Placeholder tag1',
-  },
-  
-]
-
-const alreadySelectedTags = [1, 4]
+import { useTagsQuery } from '../../api/tags/tags'
 
 export const TicketForm = () => {
   const { t } = useTranslation()
+
+  const { data } = useTagsQuery()
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedPrio, setSelectedPrio] = useState<string>('low')
-  
-  const [availableTags, setAvailableTags] = useState(placeholderTags)
-  const [selectedTags, setSelectedTags] = useState<number[]>(alreadySelectedTags)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
 
-  const handleSelect = (id: number) => {
-    setSelectedTags(selectedTags.includes(id)
-      ? selectedTags.filter((tag) => tag !== id)
-      : selectedTags.concat([id])
+  const handleSelect = (name: string) => {
+    setSelectedTags(selectedTags.includes(name)
+      ? selectedTags.filter((tag) => tag !== name)
+      : selectedTags.concat([name])
     )
   }
 
   const handlePrioChange = (prio: string) => {
     setSelectedPrio(prio)
     setIsMenuOpen(false)
-  }
-
-  const handleAddTag = (name: string) => {
-    setAvailableTags(availableTags.concat(
-      [{
-        id: availableTags[availableTags.length-1].id+1,
-        name: name
-      }]
-    ))
   }
 
   const handleConfirm = () => {
@@ -124,19 +82,15 @@ export const TicketForm = () => {
           {t('common.tags')}
         </Styled.SectionTitle>
         <Styled.TagsContainer>
-          {availableTags.map((tag) => (
+          {data?.map((tag) => (
             <TagChip
-              key={tag.id}
-              id={tag.id}
+              key={tag._id}
               name={tag.name}
-              isSelected={selectedTags.includes(tag.id)}
+              isSelected={selectedTags.includes(tag.name)}
               onSelect={handleSelect}
             />
           ))}
         </Styled.TagsContainer>
-        <TagChipInput
-          onSubmit={(name) => handleAddTag(name)}
-        />
       </Styled.SectionContainer>
       <Button
         label={t('common.send')}

@@ -6,14 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { theme } from '../../../themes'
 
 interface TagChipProps {
-  id: number
   name: string
   isSelected: boolean
-  onSelect: (id: number) => void
+  onSelect: (name: string) => void
 }
 
 export const TagChip = ({
-  id,
   name,
   isSelected,
   onSelect
@@ -30,7 +28,7 @@ export const TagChip = ({
       }}
     >
       <Button
-        onPress={() => onSelect(id)}
+        onPress={() => onSelect(name)}
         uppercase={false}
         icon={() =>
           <Icon

@@ -5,6 +5,8 @@ import { AccountDetailsForm } from './AccountDetailsForm/AccountDetailsForm'
 import { LanguageForm } from './LanguageForm/LanguageForm'
 import { PasswordForm } from './PasswordForm/PasswordForm'
 import { AssignForm } from './AssignForm/AssignForm'
+import { useRole } from '../../hooks/useRole'
+import { SpecialtyForm } from './SpecialtyForm/SpecialtyForm'
 import * as Styled from './AccountScreen.styles'
 
 export const AccountScreen = () => {
@@ -17,7 +19,11 @@ export const AccountScreen = () => {
         </Styled.ColumnContainer>
         <Styled.ColumnContainer>
           <PasswordForm />
-          <AssignForm />
+          {useRole('user') ? (
+            <AssignForm />
+          ) : (
+            <SpecialtyForm />
+          )}
         </Styled.ColumnContainer>
       </Styled.RootContainer>
     </ScrollView>

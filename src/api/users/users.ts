@@ -12,7 +12,8 @@ import { SignUpValues,
   EditDetailsValues,
   UserProfileValues,
   EditPasswordValues,
-  TeamAssignmentValues
+  TeamAssignmentValues,
+  EditSpecialtyValues
 } from './types'
 
 const postSignUp = async (
@@ -95,6 +96,25 @@ export const useTeamAssignmentMutation = (
   return useMutation(
     'assignToTeam',
     (values: TeamAssignmentValues) => postTeamAssignment(fetch, values),
+    options
+  )
+}
+
+const putSpecialty = async (
+  instance: AxiosInstance,
+  values: EditSpecialtyValues
+): Promise<EditSpecialtyValues> => {
+  const { data } = await instance.put('users/specialty', values)
+  return data
+}
+
+export const useUpdateSpecialtyMutation = (
+  options?: UseMutationOptions<EditSpecialtyValues, Error, EditSpecialtyValues>
+): UseMutationResult<EditSpecialtyValues, Error, EditSpecialtyValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    'updateSpecialty',
+    (values: EditSpecialtyValues) => putSpecialty(fetch, values),
     options
   )
 }

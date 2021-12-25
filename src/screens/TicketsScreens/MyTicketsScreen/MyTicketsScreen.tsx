@@ -51,8 +51,7 @@ export const MyTicketsScreen = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
 
   const handleSubmitTicket = () => {
-    console.log(token)
-    // navigation.navigate('CreateTicket')
+    navigation.navigate('CreateTicket')
   }
 
   const handleSortChange = (value: string) => {

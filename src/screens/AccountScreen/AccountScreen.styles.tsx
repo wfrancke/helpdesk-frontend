@@ -14,6 +14,7 @@ const RootContainer = styled.View`
 const ColumnContainer = styled.View`
   display: flex;
   flex-direction: column;
+  max-width: 400px;
 `
 
 const SectionContainer = styled.View`
@@ -39,6 +40,13 @@ const StyledButton = styled(Button)`
   margin-top: 20px;
 `
 
+const TagsContainer = styled.View`
+  display: flex;
+  max-width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
 export {
   RootContainer,
   ColumnContainer,
@@ -46,4 +54,5 @@ export {
   SectionTitle,
   StyledTextInput as TextInput,
   StyledButton as Button,
+  TagsContainer
 }
