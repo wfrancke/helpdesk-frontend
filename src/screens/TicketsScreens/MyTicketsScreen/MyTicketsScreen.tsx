@@ -5,47 +5,17 @@ import { Menu } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/core'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { useUserAccessToken } from '../../../providers/AuthProvider'
 import { theme } from '../../../themes'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TicketList } from '../../../components/data/TicketList/TicketList'
 import * as Styled from '../TicketsScreen.styles'
-
-const placeholderData = [
-  {
-    id: 1,
-    title: 'Sample title for assignment',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 2,
-    title: 'Sample Title2',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 3,
-    title: 'Sample Title3',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 4,
-    title: 'Sample Title4',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-]
+import { useMyTicketsQuery } from '../../../api/tickets/tickets'
 
 export const MyTicketsScreen = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const token = useUserAccessToken()
+
+  const { data } = useMyTicketsQuery()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
@@ -100,7 +70,7 @@ export const MyTicketsScreen = () => {
           />
         </Styled.ActionsContainer>
         <TicketList
-          items={placeholderData}
+          items={data || []}
           isRequested
         />
       </Styled.RootContainer>

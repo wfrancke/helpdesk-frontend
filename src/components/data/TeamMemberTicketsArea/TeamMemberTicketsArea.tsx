@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import { Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useAssignedTicketsQuery } from '../../../api/tickets/tickets'
 
 import { TicketList } from '../TicketList/TicketList'
-import { TicketItemType } from '../TicketList/TicketArea/TicketArea'
 import * as Styled from './TeamMemberTicketsArea.styles'
 
 interface TeamMemberTicketsAreaProps {
+  id: string
   name: string
-  items: TicketItemType[]
 }
 
 export const TeamMemberTicketsArea = ({
+  id,
   name,
-  items
 }: TeamMemberTicketsAreaProps ) => {
   const [isToggled, setIsToggled] = useState<boolean>(false)
+  const { data } = useAssignedTicketsQuery(id)
 
   return (
     <Styled.RootContainer>
@@ -34,7 +35,7 @@ export const TeamMemberTicketsArea = ({
       </Button>
       {isToggled && (
         <TicketList
-          items={items}
+          items={data || []}
         />
       )}
     </Styled.RootContainer>

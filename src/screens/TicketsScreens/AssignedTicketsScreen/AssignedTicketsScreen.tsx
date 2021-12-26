@@ -6,40 +6,12 @@ import { Menu } from 'react-native-paper'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TicketList } from '../../../components/data/TicketList/TicketList'
 import * as Styled from '../TicketsScreen.styles'
-
-const placeholderData = [
-  {
-    id: 1,
-    title: 'Sample Title1',
-    name: 'Sample Requester Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 2,
-    title: 'Sample Title2',
-    name: 'Sample Requester Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 3,
-    title: 'Sample Title3',
-    name: 'Sample Requester Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 4,
-    title: 'Sample Title4',
-    name: 'Sample Requester Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-]
+import { useMyAssignedTicketsQuery } from '../../../api/tickets/tickets'
 
 export const AssignedTicketsScreen = () => {
   const { t } = useTranslation()
+
+  const { data } = useMyAssignedTicketsQuery()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('Title')
@@ -85,7 +57,7 @@ export const AssignedTicketsScreen = () => {
           </MenuSelect>
         </Styled.ActionsContainer>
         <TicketList
-          items={placeholderData}
+          items={data || []}
         />
       </Styled.RootContainer>
     </ScrollView>

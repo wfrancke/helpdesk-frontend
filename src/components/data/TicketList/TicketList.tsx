@@ -35,7 +35,7 @@ export const TicketList = ({ items, isRequested }: TicketListProps ) => {
       )}
       {items.map((item) => (
         <TicketArea
-          key={item.id}
+          key={item._id}
           values={item}
         />
       ))}

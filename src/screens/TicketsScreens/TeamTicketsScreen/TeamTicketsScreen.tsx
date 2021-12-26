@@ -5,54 +5,13 @@ import { Menu } from 'react-native-paper'
 
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
 import { TeamMemberTicketsArea } from '../../../components/data/TeamMemberTicketsArea/TeamMemberTicketsArea'
+import { useTeamMembersQuery } from '../../../api/users/users'
 import * as Styled from '../TicketsScreen.styles'
-
-const placeholderTickets = [
-  {
-    id: 1,
-    title: 'Sample Title1',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 2,
-    title: 'Sample Title2',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 3,
-    title: 'Sample Title3',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-  {
-    id: 4,
-    title: 'Sample Title4',
-    name: 'Sample Assignee Name',
-    priority: 'critical',
-    status: 'closed'
-  },
-]
-
-const placeholderTeam = [
-  {
-    id: 1,
-    name: 'Team member 1',
-    tickets: placeholderTickets
-  },
-  {
-    id: 2,
-    name: 'Team member 2',
-    tickets: placeholderTickets
-  },
-]
 
 export const TeamTicketsScreen = () => {
   const { t } = useTranslation()
+
+  const { data } = useTeamMembersQuery()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('Title'))
@@ -97,11 +56,11 @@ export const TeamTicketsScreen = () => {
             />
           </MenuSelect>
         </Styled.ActionsContainer>
-        {placeholderTeam.map((member) => (
+        {data?.map((member) => (
           <TeamMemberTicketsArea
-            key={member.id}
-            name={member.name}
-            items={member.tickets}
+            key={member._id}
+            id={member._id}
+            name={`${member.firstName} ${member.lastName}`}
           />
         ))}
       </Styled.RootContainer>

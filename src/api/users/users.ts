@@ -118,3 +118,16 @@ export const useUpdateSpecialtyMutation = (
     options
   )
 }
+
+const getTeamMembers = async (
+  instance: AxiosInstance
+): Promise<UserProfileValues[]> => {
+  const { data } = await instance.get('users/team')
+  return data
+}
+
+export const useTeamMembersQuery = (options?: Omit<UseQueryOptions<UserProfileValues[], unknown>, 'queryKey'>)
+: UseQueryResult<UserProfileValues[], unknown> => {
+  const { fetch } = useFetch()
+  return useQuery('getTeam', () => getTeamMembers(fetch), options)
+}

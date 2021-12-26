@@ -15,6 +15,7 @@ export interface EditDetailsValues {
 }
 
 export interface UserProfileValues {
+  _id: string
   firstName: string
   lastName: string
   email: string

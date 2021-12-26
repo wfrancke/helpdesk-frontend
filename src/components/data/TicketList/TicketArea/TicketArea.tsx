@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next'
 import * as Styled from './TicketArea.styles'
 
 export interface TicketItemType {
-  id: number,
+  _id: string,
   title: string,
-  name: string,
   priority: string,
   status: string
 }
@@ -24,7 +23,7 @@ export const TicketArea = ({ values }: TicketAreaProps) => {
     : values.title
 
   return (
-    <Link to={{ screen: 'TicketDetails', params: { ticketId: values.id }}}
+    <Link to={{ screen: 'TicketDetails', params: { ticketId: values._id }}}
       style={{ marginTop: 8 }}
     >
       <Styled.RootContainer>
@@ -32,7 +31,7 @@ export const TicketArea = ({ values }: TicketAreaProps) => {
           {title}
         </Styled.Title>
         <Styled.Text>
-          {values.name}
+          name
         </Styled.Text>
         <Styled.SecondaryContainer>
           <Styled.Text>
