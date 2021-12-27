@@ -43,6 +43,20 @@ export const useProfileQuery = (options?: Omit<UseQueryOptions<UserProfileValues
   return useQuery('getProfile', () => getProfile(fetch), options)
 }
 
+const getUser = async (
+  instance: AxiosInstance,
+  id: string,
+): Promise<UserProfileValues> => {
+  const { data } = await instance.get(`users/id/${id}`)
+  return data
+}
+
+export const useUserQuery = (id: string, options?: Omit<UseQueryOptions<UserProfileValues, unknown>, 'queryKey'>)
+: UseQueryResult<UserProfileValues, unknown> => {
+  const { fetch } = useFetch()
+  return useQuery(['getUser', id], () => getUser(fetch, id), options)
+}
+
 const putOwnDetails = async (
   instance: AxiosInstance,
   values: EditDetailsValues

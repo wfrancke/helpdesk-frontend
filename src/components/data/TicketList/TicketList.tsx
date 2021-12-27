@@ -21,7 +21,7 @@ export const TicketList = ({ items, isRequested }: TicketListProps ) => {
             {t('common.title')}
           </Styled.TitleHeader>
           <Styled.Header>
-            {t(isRequested ? 'ticketList.requester' : 'ticketList.assignee')}
+            {t(!isRequested ? 'ticketList.requester' : 'ticketList.assignee')}
           </Styled.Header>
           <Styled.SecondaryContainer>
             <Styled.Header>
@@ -37,6 +37,7 @@ export const TicketList = ({ items, isRequested }: TicketListProps ) => {
         <TicketArea
           key={item._id}
           values={item}
+          isRequested={isRequested || false}
         />
       ))}
     </Styled.RootContainer>

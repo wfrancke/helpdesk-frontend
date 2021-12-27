@@ -17,7 +17,7 @@ export type DrawerParamList = {
   AssignedTickets: undefined,
   TeamTickets: undefined,
   CreateTicket: undefined,
-  TicketDetails: { ticketId: number },
+  TicketDetails: { ticketId: string },
   Account: undefined,
 }
 
@@ -48,7 +48,7 @@ export const HomeScreen = () => {
       <Drawer.Screen
         name='TicketDetails'
         component={TicketDetailsScreen}
-        initialParams={{ ticketId: 0 }}
+        initialParams={{ ticketId: '' }}
       />
       <Drawer.Screen name='Account' component={AccountScreen} />
     </Drawer.Navigator>

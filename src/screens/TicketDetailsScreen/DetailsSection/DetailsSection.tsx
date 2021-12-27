@@ -13,8 +13,8 @@ interface TicketDetails {
   assignee: string
   status: string
   priority: string
-  filingDate: Date
-  finishDate: Date
+  fillingDate: Date
+  finishDate?: Date
   tags: string[]
 }
 
@@ -104,17 +104,19 @@ export const DetailsSection = ({ values }: DetailsSectionProps) => {
             {t('common.filingDate')}
           </Styled.SectionTitle>
           <Styled.Text>
-            {values.filingDate.toString()}
+            {values.fillingDate.toString()}
           </Styled.Text>
         </Styled.SectionContainer>
-        <Styled.SectionContainer>
-          <Styled.SectionTitle>
-            {t('common.finishDate')}
-          </Styled.SectionTitle>
-          <Styled.Text>
-            {values.finishDate.toString()}
-          </Styled.Text>
-        </Styled.SectionContainer>
+        {values.finishDate && (
+          <Styled.SectionContainer>
+            <Styled.SectionTitle>
+              {t('common.finishDate')}
+            </Styled.SectionTitle>
+            <Styled.Text>
+              {values.finishDate.toString()}
+            </Styled.Text>
+          </Styled.SectionContainer>
+        )}
       </Styled.RowContainer>
       <Styled.SectionContainer>
         <Styled.SectionTitle>
