@@ -1,13 +1,19 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
 import { Link } from '@react-navigation/native'
+import { DrawerScreenProps } from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { TicketForm } from '../../components/TicketForm/TicketForm'
 import { theme } from '../../themes'
-import * as Styled from './CreateTicketScreen.styles'
+import { DrawerParamList } from '../HomeScreen/HomeScreen'
+import * as Styled from './EditTicketScreen.styles'
+import { useTicketQuery } from '../../api/tickets/tickets'
 
-export const CreateTicketScreen = () => {
+export const EditTicketScreen = ({
+  route
+}: DrawerScreenProps<DrawerParamList, 'TicketDetails'>) => {
+  const { data } = useTicketQuery(route.params.ticketId)
 
   return (
     <ScrollView>

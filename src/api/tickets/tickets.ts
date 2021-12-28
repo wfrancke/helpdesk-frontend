@@ -1,4 +1,7 @@
 import { 
+  useMutation,
+  UseMutationOptions,
+  UseMutationResult,
   useQuery,
   UseQueryOptions,
   UseQueryResult
@@ -6,7 +9,7 @@ import {
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-import { TicketValues } from './types'
+import { TicketValues, CreateTicketValues, TicketStatus } from './types'
 
 const getTicket = async (
   instance: AxiosInstance,
@@ -60,4 +63,60 @@ export const useAssignedTicketsQuery = (id: string, options?: Omit<UseQueryOptio
 : UseQueryResult<TicketValues[], unknown> => {
   const { fetch } = useFetch()
   return useQuery(['getAssignedTickets', id], () => getAssignedTickets(fetch, id), options)
+}
+
+const postTicket = async (
+  instance: AxiosInstance,
+  values: CreateTicketValues
+): Promise<CreateTicketValues> => {
+  const { data } = await instance.post('tickets', values)
+  return data
+}
+
+export const useCreateTicketMutation = (options?: UseMutationOptions<CreateTicketValues, Error, CreateTicketValues>)
+: UseMutationResult<CreateTicketValues, Error, CreateTicketValues> => {
+  const { fetch } = useFetch()
+  return useMutation('createTicket', (values: CreateTicketValues) => postTicket(fetch, values), options)
+}
+
+const putTicketDetails = async (
+  instance: AxiosInstance,
+  values: CreateTicketValues,
+  id: string,
+): Promise<CreateTicketValues> => {
+  const { data } = await instance.put(`tickets/details/${id}`, values)
+  return data
+}
+
+export const useUpdateTicketDetailsMutation = (
+  id: string,
+  options?: UseMutationOptions<CreateTicketValues, Error, CreateTicketValues>
+): UseMutationResult<CreateTicketValues, Error, CreateTicketValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    ['updateTicketDetails', id],
+    (values: CreateTicketValues) => putTicketDetails(fetch, values, id),
+    options
+  )
+}
+
+const putTicketStatus = async (
+  instance: AxiosInstance,
+  values: TicketStatus,
+  id: string,
+): Promise<TicketStatus> => {
+  const { data } = await instance.put(`tickets/status/${id}`, values)
+  return data
+}
+
+export const useUpdateTicketStatusMutation = (
+  id: string,
+  options?: UseMutationOptions<TicketStatus, Error, TicketStatus>
+): UseMutationResult<TicketStatus, Error, TicketStatus> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    ['updateTicketStatus', id],
+    (values: TicketStatus) => putTicketStatus(fetch, values, id),
+    options
+  )
 }

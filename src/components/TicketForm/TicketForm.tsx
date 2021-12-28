@@ -8,7 +8,23 @@ import { TagChip } from './TagChip/TagChip'
 import * as Styled from './TicketForm.styles'
 import { useTagsQuery } from '../../api/tags/tags'
 
-export const TicketForm = () => {
+interface TicketValues {
+  _id: string
+  title: string
+  description: string
+  priority: string
+  tags: string[]
+}
+
+interface TicketFormProps {
+  initialValues?: TicketValues
+  onSubmit: (values: TicketValues) => void
+}
+
+export const TicketForm = ({
+  initialValues,
+  onSubmit
+}: TicketFormProps) => {
   const { t } = useTranslation()
 
   const { data } = useTagsQuery()

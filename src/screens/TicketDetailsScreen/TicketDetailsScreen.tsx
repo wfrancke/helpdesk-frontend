@@ -20,6 +20,7 @@ export const TicketDetailsScreen = ({
   
 
   const data = {
+    _id: ticketData?._id || '',
     title: ticketData?.title || '',
     description: ticketData?.description || '',
     requester: `${requesterData?.firstName} ${requesterData?.lastName}`,

@@ -11,12 +11,14 @@ import { TicketDetailsScreen } from '../TicketDetailsScreen/TicketDetailsScreen'
 import { AccountScreen } from '../AccountScreen/AccountScreen'
 import { useSetRole, useUserAccessToken } from '../../providers/AuthProvider'
 import { useProfileQuery } from '../../api/users/users'
+import { EditTicketScreen } from '../EditTicketScreen/EditTicketScreen'
 
 export type DrawerParamList = {
   MyTickets: undefined,
   AssignedTickets: undefined,
   TeamTickets: undefined,
   CreateTicket: undefined,
+  EditTicket: { ticketId: string },
   TicketDetails: { ticketId: string },
   Account: undefined,
 }
@@ -45,6 +47,11 @@ export const HomeScreen = () => {
       <Drawer.Screen name='AssignedTickets' component={AssignedTicketsScreen} />
       <Drawer.Screen name='TeamTickets' component={TeamTicketsScreen} />
       <Drawer.Screen name='CreateTicket' component={CreateTicketScreen} />
+      <Drawer.Screen
+        name='EditTicket'
+        component={EditTicketScreen}
+        initialParams={{ ticketId: ''}}
+      />
       <Drawer.Screen
         name='TicketDetails'
         component={TicketDetailsScreen}

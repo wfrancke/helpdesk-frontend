@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigation } from '@react-navigation/native'
 import { Menu } from 'react-native-paper'
+import { useUpdateTicketStatusMutation } from '../../../api/tickets/tickets'
 
 import { Button } from '../../../components/Button/Button'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
+import { Status } from '../../../types/Status'
 import * as Styled from '../TicketDetailsScreen.styles'
 
 interface TicketDetails {
+  _id: string
   title: string
   description: string
   requester: string
@@ -24,12 +28,28 @@ interface DetailsSectionProps {
 
 export const DetailsSection = ({ values }: DetailsSectionProps) => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
+  
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedStatus, setSelectedStatus] = useState<string>(values.status)
 
+  useEffect(() => {
+    setSelectedStatus(values.status)
+  }, [values])
+
+  const { mutate } = useUpdateTicketStatusMutation(values._id)
+
   const handleStatusChange = (status: string) => {
-    setSelectedStatus(status)
+    setSelectedStatus(status as Status)
     setIsMenuOpen(false)
+  }
+
+  const handleStatusSubmit = () => {
+    mutate({ status: selectedStatus })
+  }
+
+  const handleEdit = () => {
+    navigation.navigate('EditTicket', { ticketId: values._id })
   }
 
   return (
@@ -88,6 +108,10 @@ export const DetailsSection = ({ values }: DetailsSectionProps) => {
               onPress={() => handleStatusChange('open')}
             />
           </MenuSelect>
+          <Button
+            label={t('common.submit')}
+            onPress={handleStatusSubmit}
+          />
         </Styled.SectionContainer>
         <Styled.SectionContainer>
           <Styled.SectionTitle>
@@ -129,7 +153,7 @@ export const DetailsSection = ({ values }: DetailsSectionProps) => {
       </Styled.SectionContainer>
       <Button
         label={t('common.edit')}
-        onPress={() => null}
+        onPress={handleEdit}
       />
     </Styled.DetailsContainer>
   )
