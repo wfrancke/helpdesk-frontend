@@ -37,6 +37,9 @@ export default {
           dontMatch: 'Hasła się nie pokrywają',
           required: 'Powtórzenie hasła wymagane'
         },
+        title: {
+          required: 'Tytuł jest wymagany'
+        }
       }
     },
     drawer: {

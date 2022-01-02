@@ -37,6 +37,9 @@ export default {
           dontMatch: 'Passwords don\'t match',
           required: 'Confirmation required'
         },
+        title: {
+          required: 'Title is required'
+        }
       }
     },
     drawer: {

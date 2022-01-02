@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Menu } from 'react-native-paper'
+import { HelperText, Menu } from 'react-native-paper'
+import { useFormik } from 'formik'
 
 import { MenuSelect } from '../MenuSelect/MenuSelect'
 import { Button } from '../Button/Button'
 import { TagChip } from './TagChip/TagChip'
-import * as Styled from './TicketForm.styles'
 import { useTagsQuery } from '../../api/tags/tags'
+import { createTicketSchema } from '../../schemas/createTicketSchema'
+import * as Styled from './TicketForm.styles'
 
 interface TicketValues {
-  _id: string
   title: string
   description: string
   priority: string
@@ -26,28 +27,36 @@ export const TicketForm = ({
   onSubmit
 }: TicketFormProps) => {
   const { t } = useTranslation()
-
-  const { data } = useTagsQuery()
+  const { data: tagsData } = useTagsQuery()
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const [selectedPrio, setSelectedPrio] = useState<string>('low')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+  } = useFormik<TicketValues>({
+    initialValues: initialValues || {
+      title: '',
+      description: '',
+      priority: 'low',
+      tags: []
+    },
+    validationSchema: createTicketSchema,
+    onSubmit,
+  })
 
   const handleSelect = (name: string) => {
-    setSelectedTags(selectedTags.includes(name)
-      ? selectedTags.filter((tag) => tag !== name)
-      : selectedTags.concat([name])
-    )
+    values.tags = values.tags.includes(name)
+      ? values.tags.filter((tag) => tag !== name)
+      : values.tags.concat([name])
   }
 
   const handlePrioChange = (prio: string) => {
-    setSelectedPrio(prio)
+    values.priority = prio
     setIsMenuOpen(false)
-  }
-
-  const handleConfirm = () => {
-    console.log(selectedTags)
   }
 
   return (
@@ -58,7 +67,17 @@ export const TicketForm = ({
         </Styled.SectionTitle>
         <Styled.TitleInput
           mode='outlined'
+          value={values.title}
+          onChangeText={handleChange('title')}
+          onBlur={handleBlur('title')}
+          error={!!errors.title}
         />
+        <HelperText 
+          type='error'
+          visible={!!errors.title}
+        >
+          {t(errors.title || '')}
+        </HelperText>
       </Styled.SectionContainer>
       <Styled.SectionContainer>
         <Styled.SectionTitle>
@@ -67,6 +86,10 @@ export const TicketForm = ({
         <Styled.DescriptionInput
           mode='outlined'
           multiline={true}
+          value={values.description}
+          onChangeText={handleChange('description')}
+          onBlur={handleBlur('description')}
+          error={!!errors.description}
         />
       </Styled.SectionContainer>
       <Styled.SectionContainer>
@@ -77,7 +100,7 @@ export const TicketForm = ({
           visible={isMenuOpen}
           onDismiss={() => setIsMenuOpen(false)}
           onPress={() => setIsMenuOpen(true)}
-          label={t(`ticketList.${selectedPrio}`)}
+          label={t(`ticketList.${values.priority}`)}
         >
           <Menu.Item
             title={t('ticketList.low')}
@@ -98,11 +121,11 @@ export const TicketForm = ({
           {t('common.tags')}
         </Styled.SectionTitle>
         <Styled.TagsContainer>
-          {data?.map((tag) => (
+          {tagsData?.map((tag) => (
             <TagChip
               key={tag._id}
               name={tag.name}
-              isSelected={selectedTags.includes(tag.name)}
+              isSelected={values.tags.includes(tag.name)}
               onSelect={handleSelect}
             />
           ))}
@@ -110,7 +133,7 @@ export const TicketForm = ({
       </Styled.SectionContainer>
       <Button
         label={t('common.send')}
-        onPress={handleConfirm}
+        onPress={handleSubmit}
       />
     </Styled.RootContainer>
   )

@@ -1,13 +1,21 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
-import { Link } from '@react-navigation/native'
+import { Link, useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { TicketForm } from '../../components/TicketForm/TicketForm'
 import { theme } from '../../themes'
+import { useCreateTicketMutation } from '../../api/tickets/tickets'
 import * as Styled from './CreateTicketScreen.styles'
 
 export const CreateTicketScreen = () => {
+  const navigation = useNavigation()
+
+  const { mutate } = useCreateTicketMutation({
+    onSuccess: () => {
+      navigation.goBack()
+    }
+  })
 
   return (
     <ScrollView>
@@ -16,7 +24,7 @@ export const CreateTicketScreen = () => {
           <Icon name='arrow-left' color={theme.colors.text} size={40} />
         </Link>
         <TicketForm
-          onSubmit={() => null}
+          onSubmit={(values) => mutate(values)}
         />
       </Styled.RootContainer>
     </ScrollView>
