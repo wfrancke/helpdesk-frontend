@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { DetailsSection } from './DetailsSection/DetailsSection'
+import { CommentsSection } from './CommentsSection/CommentsSection'
 import { DrawerParamList } from '../HomeScreen/HomeScreen'
 import { theme } from '../../themes'
 import * as Styled from './TicketDetailsScreen.styles'
@@ -43,6 +44,7 @@ export const TicketDetailsScreen = ({
             values={data}
           />
         </Styled.DetailsContainer>
+        <CommentsSection />
       </Styled.RootContainer>
     </ScrollView>
   )
