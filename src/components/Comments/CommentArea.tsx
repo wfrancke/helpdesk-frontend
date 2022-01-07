@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 import { theme } from '../../themes'
 
@@ -8,7 +8,7 @@ interface CommentAreaProps {
   content: string
   sender: string
   isSender?: boolean
-  date: Date
+  date: string
 }
 
 export const CommentArea = ({
@@ -26,7 +26,8 @@ export const CommentArea = ({
         borderRadius: 15,
         maxWidth: 280,
         minHeight: 100,
-        margin: 10
+        marginVertical: 10,
+        marginLeft: isSender ? 0 : 15,
       }}
     >
       <Text
@@ -37,7 +38,7 @@ export const CommentArea = ({
           color: isSender ? theme.colors.secondary : theme.colors.background,
         }}
       >
-        {format(date, 'd.MM H:m')}
+        {date && format(parseISO(date), 'H:m, d.MM')}
       </Text>
       <Text
         style={{

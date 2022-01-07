@@ -73,6 +73,8 @@ export default {
       sortByStatus: 'Sortuj wg statusu',
       submit: 'Utwórz',
       addTag: 'Dodaj tag',
+      comments: 'Komantarze',
+      typeComment: 'Dodaj komentarz',
     },
     ticketList: {
       requester: 'Zgłaszający',

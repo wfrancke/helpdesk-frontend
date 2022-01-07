@@ -1,6 +1,14 @@
 import { Priority } from '../../types/Priority'
 import { Status } from '../../types/Status'
 
+export interface Comment {
+  _id: string
+  content: string
+  sender: string
+  date: string
+  isPublic: boolean
+}
+
 export interface TicketValues {
   _id: string
   title: string
@@ -9,9 +17,10 @@ export interface TicketValues {
   assignedId: string
   priority: Priority
   status: Status
-  fillingDate: Date
-  finishDate: Date
+  fillingDate: string
+  finishDate: string
   tags: string[]
+  comments: Comment[]
 }
 
 export interface CreateTicketValues {
@@ -23,4 +32,11 @@ export interface CreateTicketValues {
 
 export interface TicketStatus {
   status: string
+}
+
+export interface AddCommentValues {
+  content: string
+  sender: string
+  date: string
+  isPublic: boolean
 }

@@ -73,6 +73,8 @@ export default {
       sortByStatus: 'Sort by status',
       submit: 'Submit',
       addTag: 'Add tag',
+      comments: 'Comments',
+      typeComment: 'Type comment',
     },
     ticketList: {
       requester: 'Requester',

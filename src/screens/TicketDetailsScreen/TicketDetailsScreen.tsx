@@ -10,11 +10,12 @@ import { DrawerParamList } from '../HomeScreen/HomeScreen'
 import { theme } from '../../themes'
 import * as Styled from './TicketDetailsScreen.styles'
 import { useTicketQuery } from '../../api/tickets/tickets'
-import { useUserQuery } from '../../api/users/users'
+import { useProfileQuery, useUserQuery } from '../../api/users/users'
 
 export const TicketDetailsScreen = ({
   route
 }: DrawerScreenProps<DrawerParamList, 'TicketDetails'>) => {
+  const { data: userData } = useProfileQuery()
   const { data: ticketData } = useTicketQuery(route.params.ticketId)
   const { data: requesterData } = useUserQuery(ticketData?.requesterId || '')
   const { data: assignedData } = useUserQuery(ticketData?.assignedId || '')
@@ -28,10 +29,12 @@ export const TicketDetailsScreen = ({
     assignee: `${assignedData?.firstName} ${assignedData?.lastName}`,
     status: ticketData?.status || 'closed',
     priority: ticketData?.priority || 'low',
-    fillingDate: ticketData?.fillingDate || new Date(),
+    fillingDate: ticketData?.fillingDate || '',
     finishDate: ticketData?.finishDate,
-    tags: ticketData?.tags || []
+    tags: ticketData?.tags || [],
   }
+
+  const commentData = ticketData?.comments || []
 
   return (
     <ScrollView>
@@ -44,7 +47,11 @@ export const TicketDetailsScreen = ({
             values={data}
           />
         </Styled.DetailsContainer>
-        <CommentsSection />
+        <CommentsSection
+          values={commentData}
+          user={`${userData?.firstName} ${userData?.lastName}`}
+          ticketId={data._id}
+        />
       </Styled.RootContainer>
     </ScrollView>
   )

@@ -18,6 +18,13 @@ const DetailsContainer = styled.View`
   flex-direction: column;
 `
 
+const HeaderContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+`
+
 const SectionContainer = styled.View`
   display: flex;
   flex-direction: column;
@@ -56,6 +63,7 @@ const StyledText = styled.Text`
 export {
   RowContainer,
   RootContainer,
+  HeaderContainer,
   DetailsContainer,
   SectionContainer,
   SectionTitle,

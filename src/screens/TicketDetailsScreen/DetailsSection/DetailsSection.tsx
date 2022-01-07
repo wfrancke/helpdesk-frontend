@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigation } from '@react-navigation/native'
 import { Menu } from 'react-native-paper'
 import { useUpdateTicketStatusMutation } from '../../../api/tickets/tickets'
+import { format, parseISO } from 'date-fns'
 
 import { Button } from '../../../components/Button/Button'
 import { MenuSelect } from '../../../components/MenuSelect/MenuSelect'
@@ -17,8 +18,8 @@ interface TicketDetails {
   assignee: string
   status: string
   priority: string
-  fillingDate: Date
-  finishDate?: Date
+  fillingDate: string
+  finishDate?: string
   tags: string[]
 }
 
@@ -128,7 +129,7 @@ export const DetailsSection = ({ values }: DetailsSectionProps) => {
             {t('common.filingDate')}
           </Styled.SectionTitle>
           <Styled.Text>
-            {values.fillingDate.toString()}
+            {values.fillingDate && format(parseISO(values.fillingDate), 'H:m, d.MM.y')}
           </Styled.Text>
         </Styled.SectionContainer>
         {values.finishDate && (
@@ -137,7 +138,7 @@ export const DetailsSection = ({ values }: DetailsSectionProps) => {
               {t('common.finishDate')}
             </Styled.SectionTitle>
             <Styled.Text>
-              {values.finishDate.toString()}
+              {values.finishDate && format(parseISO(values.finishDate), 'H:m, d.MM.y')}
             </Styled.Text>
           </Styled.SectionContainer>
         )}

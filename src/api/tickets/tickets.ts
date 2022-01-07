@@ -9,7 +9,7 @@ import {
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-import { TicketValues, CreateTicketValues, TicketStatus } from './types'
+import { TicketValues, CreateTicketValues, TicketStatus, AddCommentValues } from './types'
 
 const getTicket = async (
   instance: AxiosInstance,
@@ -117,6 +117,27 @@ export const useUpdateTicketStatusMutation = (
   return useMutation(
     ['updateTicketStatus', id],
     (values: TicketStatus) => putTicketStatus(fetch, values, id),
+    options
+  )
+}
+
+export const putComment = async (
+  instance: AxiosInstance,
+  values: AddCommentValues,
+  id: string,
+): Promise<AddCommentValues> => {
+  const { data } = await instance.put(`tickets/comment/${id}`, values)
+  return data
+}
+
+export const useCommentMutation = (
+  id: string,
+  options?: UseMutationOptions<AddCommentValues, Error, AddCommentValues>
+): UseMutationResult<AddCommentValues, Error, AddCommentValues> => {
+  const { fetch } = useFetch()
+  return useMutation(
+    ['addComment', id],
+    (values: AddCommentValues) => putComment(fetch, values, id),
     options
   )
 }
