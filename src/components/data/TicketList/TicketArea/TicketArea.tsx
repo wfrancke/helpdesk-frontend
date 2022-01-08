@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 
-import * as Styled from './TicketArea.styles'
 import { useUserQuery } from '../../../../api/users/users'
+import * as Styled from './TicketArea.styles'
 
 export interface TicketItemType {
   _id: string,
@@ -28,6 +28,16 @@ export const TicketArea = ({ values, isRequested }: TicketAreaProps) => {
 
   const { data: userData } = useUserQuery(isRequested ? values.assignedId : values.requesterId)
 
+  const getPriorityColor = (prio: string) => {
+    if (prio === 'low') {
+      return 'green'
+    }
+    if (prio === 'high') {
+      return 'orange'
+    }
+    return 'red'
+  }
+
   return (
     <Link to={{ screen: 'TicketDetails', params: { ticketId: values._id }}}
       style={{ marginTop: 8 }}
@@ -40,10 +50,18 @@ export const TicketArea = ({ values, isRequested }: TicketAreaProps) => {
           {`${userData?.firstName} ${userData?.lastName}`}
         </Styled.Text>
         <Styled.SecondaryContainer>
-          <Styled.Text>
+          <Styled.Text
+            style={{
+              color: getPriorityColor(values.priority)
+            }}
+          >
             {t(`ticketList.${values.priority}`)}
           </Styled.Text>
-          <Styled.Text>
+          <Styled.Text
+            style={{
+              color: values.status === 'open' ? 'green' : 'grey'
+            }}
+          >
             {t(`ticketList.${values.status}`)}
           </Styled.Text>
         </Styled.SecondaryContainer>

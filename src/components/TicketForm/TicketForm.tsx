@@ -37,6 +37,7 @@ export const TicketForm = ({
     handleBlur,
     values,
     errors,
+    setFieldValue
   } = useFormik<TicketValues>({
     initialValues: initialValues || {
       title: '',
@@ -49,9 +50,12 @@ export const TicketForm = ({
   })
 
   const handleSelect = (name: string) => {
-    values.tags = values.tags.includes(name)
-      ? values.tags.filter((tag) => tag !== name)
-      : values.tags.concat([name])
+    setFieldValue(
+      'tags',
+      values.tags = values.tags.includes(name)
+        ? values.tags.filter((tag) => tag !== name)
+        : values.tags.concat([name])
+    )
   }
 
   const handlePrioChange = (prio: string) => {

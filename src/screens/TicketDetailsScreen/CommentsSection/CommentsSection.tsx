@@ -8,6 +8,7 @@ import { theme } from '../../../themes'
 import { useCommentMutation } from '../../../api/tickets/tickets'
 import { useRole } from '../../../hooks/useRole'
 import * as Styled from '../TicketDetailsScreen.styles'
+import { QueryClient } from 'react-query'
 
 interface Comment {
   _id: string
@@ -31,8 +32,13 @@ export const CommentsSection = ({
   const [newComment, setNewComment] = useState<string>('')
   const [isPublic, setIsPublic] = useState<boolean>(true)
   const { t } = useTranslation()
+  const queryClient = new QueryClient()
 
-  const { mutate } = useCommentMutation(ticketId)
+  const { mutate } = useCommentMutation(ticketId, {
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ['getTicket', ticketId]})
+    }
+  })
 
   const handleSendComment = () => {
     mutate({

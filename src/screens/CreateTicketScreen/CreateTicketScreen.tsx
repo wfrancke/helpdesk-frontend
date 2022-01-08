@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView } from 'react-native'
 import { Link, useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { QueryClient } from 'react-query'
 
 import { TicketForm } from '../../components/TicketForm/TicketForm'
 import { theme } from '../../themes'
@@ -10,10 +11,12 @@ import * as Styled from './CreateTicketScreen.styles'
 
 export const CreateTicketScreen = () => {
   const navigation = useNavigation()
+  const queryClient = new QueryClient()
 
   const { mutate } = useCreateTicketMutation({
     onSuccess: () => {
       navigation.goBack()
+      queryClient.refetchQueries({ queryKey: 'getMyTickets'})
     }
   })
 
