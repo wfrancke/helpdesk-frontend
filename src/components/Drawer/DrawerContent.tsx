@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DrawerContentComponentProps } from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { View, Dimensions } from 'react-native'
@@ -11,6 +11,7 @@ import * as Styled from './DrawerContent.styles'
 
 export const DrawerContent = (props: DrawerContentComponentProps) => {
   const { t } = useTranslation()
+  const [lastClicked, setLastClicked] = useState<number>(0)
 
   const handleLogOut = () => {
     props.navigation.navigate('Login')
@@ -27,8 +28,11 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='email-send' {...props} />}
             label={t('drawer.myTickets')}
-            onPress={() => props.navigation.navigate('MyTickets')}
-            focused={props.state.history.length === 1}
+            onPress={() => {
+              setLastClicked(1)
+              props.navigation.navigate('MyTickets')
+            }}
+            focused={lastClicked === 1}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
             inactiveTintColor={theme.colors.secondary}
@@ -38,8 +42,11 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
             <Styled.DrawerItem
               icon={(props) => <Icon name='at' {...props} />}
               label={t('drawer.assignedTickets')}
-              onPress={() => props.navigation.navigate('AssignedTickets')}
-              focused={props.state.history.length === 2}
+              onPress={() => {
+                setLastClicked(2)
+                props.navigation.navigate('AssignedTickets')
+              }}
+              focused={lastClicked === 2}
               inactiveBackgroundColor={theme.colors.accent}
               activeBackgroundColor={theme.colors.background}
               inactiveTintColor={theme.colors.secondary}
@@ -51,8 +58,11 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
               <Styled.DrawerItem
                 icon={(props) => <Icon name='account-group' {...props} />}
                 label={t('drawer.teamTickets')}
-                onPress={() => props.navigation.navigate('TeamTickets')}
-                focused={props.state.history.length === 3}
+                onPress={() => {
+                  setLastClicked(3)
+                  props.navigation.navigate('TeamTickets')
+                }}
+                focused={lastClicked === 3}
                 inactiveBackgroundColor={theme.colors.accent}
                 activeBackgroundColor={theme.colors.background}
                 inactiveTintColor={theme.colors.secondary}
@@ -61,8 +71,11 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
               <Styled.DrawerItem
                 icon={(props) => <Icon name='chart-bar' {...props} />}
                 label={t('drawer.statistics')}
-                onPress={() => props.navigation.navigate('MyTickets')}
-                focused={props.state.history.length === 4}
+                onPress={() => {
+                  setLastClicked(4)
+                  props.navigation.navigate('MyTickets')
+                }}
+                focused={lastClicked === 4}
                 inactiveBackgroundColor={theme.colors.accent}
                 activeBackgroundColor={theme.colors.background}
                 inactiveTintColor={theme.colors.secondary}
@@ -73,8 +86,11 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
           <Styled.DrawerItem
             icon={(props) => <Icon name='account-circle' {...props} />}
             label={t('drawer.account')}
-            onPress={() => props.navigation.navigate('Account')}
-            focused={props.state.history.length === 5}
+            onPress={() => {
+              setLastClicked(5)
+              props.navigation.navigate('Account')
+            }}
+            focused={lastClicked === 5}
             inactiveBackgroundColor={theme.colors.accent}
             activeBackgroundColor={theme.colors.background}
             inactiveTintColor={theme.colors.secondary}
