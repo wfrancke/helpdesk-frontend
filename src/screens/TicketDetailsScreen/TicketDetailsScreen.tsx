@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { DrawerScreenProps } from '@react-navigation/drawer'
 import { Link } from '@react-navigation/native'
 import { ScrollView } from 'react-native'
@@ -25,8 +25,8 @@ export const TicketDetailsScreen = ({
     _id: ticketData?._id || '',
     title: ticketData?.title || '',
     description: ticketData?.description || '',
-    requester: `${requesterData?.firstName} ${requesterData?.lastName}`,
-    assignee: `${assignedData?.firstName} ${assignedData?.lastName}`,
+    requester: `${requesterData?.firstName} ${requesterData?.lastName}\nmail: ${requesterData?.email}\nnum: ${requesterData?.phoneNumber}`,
+    assignee: `${assignedData?.firstName} ${assignedData?.lastName}\nmail: ${assignedData?.email}\nnum: ${assignedData?.phoneNumber}`,
     status: ticketData?.status || 'closed',
     priority: ticketData?.priority || 'low',
     fillingDate: ticketData?.fillingDate || '',
@@ -34,7 +34,9 @@ export const TicketDetailsScreen = ({
     tags: ticketData?.tags || [],
   }
 
-  const commentData = ticketData?.comments || []
+  const commentData = useMemo(() => (
+    ticketData?.comments || []
+  ), [ticketData])
 
   return (
     <ScrollView>

@@ -34,14 +34,14 @@ export const CommentsSection = ({
   const { t } = useTranslation()
   const queryClient = new QueryClient()
 
-  const { mutate } = useCommentMutation(ticketId, {
+  const { mutateAsync } = useCommentMutation(ticketId, {
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ['getTicket', ticketId]})
     }
   })
 
-  const handleSendComment = () => {
-    mutate({
+  const handleSendComment = async () => {
+    await mutateAsync({
       content: newComment,
       date: new Date().toISOString(),
       sender: user,
