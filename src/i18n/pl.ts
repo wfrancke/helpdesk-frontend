@@ -95,5 +95,19 @@ export default {
       polish: 'Polski',
       repeatPass: 'Powtórz hasło'
     },
+    stats: {
+      closedOverall: 'Zamknięte zgłoszenia',
+      closedLow: 'Zamknięte zgłoszenia z niskim priorytetem',
+      closedHigh: 'Zamknięte zgłoszenia z wysokim priorytetem',
+      closedCritical: 'Zamknięte zgłoszenia z krytycznym priorytetem',
+      openOverall: 'Otwarte zgłoszenia',
+      openLow: 'Otwarte zgłoszenia z niskim priorytetem',
+      openHigh: 'Otwarte zgłoszenia z wysokim priorytetem',
+      openCritical: 'Otwarte zgłoszenia z krytycznym priorytetem',
+      speedOverall: 'Średni czas wykonania zgłoszeń (w dniach)',
+      speedLow: 'Średni czas wykonania zgłoszeń z niskim priorytetem',
+      speedHigh: 'Średni czas wykonania zgłoszeń z wysokim priorytetem',
+      speedCritical: 'Średni czas wykonania zgłoszeń z krytycznym priorytetem',
+    }
   }
 }

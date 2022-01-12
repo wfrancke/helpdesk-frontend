@@ -95,5 +95,19 @@ export default {
       pl: 'Polish',
       repeatPass: 'Repeat password'
     },
+    stats: {
+      closedOverall: 'Closed tickets',
+      closedLow: 'Closed tickets with low priority',
+      closedHigh: 'Closed tickets with high priority',
+      closedCritical: 'Closed tickets with critical priority',
+      openOverall: 'Open Tickets',
+      openLow: 'Open tickets with low priority',
+      openHigh: 'Open tickets with high priority',
+      openCritical: 'Open tickets with critical priority',
+      speedOverall: 'Average completion of tickets (in days)',
+      speedLow: 'Average completion of tickets with low priority',
+      speedHigh: 'Average completion of tickets with high priority',
+      speedCritical: 'Average completion of tickets with critical priority',
+    }
   }
 }

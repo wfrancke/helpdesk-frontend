@@ -73,7 +73,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
                 label={t('drawer.statistics')}
                 onPress={() => {
                   setLastClicked(4)
-                  props.navigation.navigate('MyTickets')
+                  props.navigation.navigate('Stats')
                 }}
                 focused={lastClicked === 4}
                 inactiveBackgroundColor={theme.colors.accent}

@@ -12,6 +12,7 @@ import { AccountScreen } from '../AccountScreen/AccountScreen'
 import { useSetRole, useUserAccessToken } from '../../providers/AuthProvider'
 import { useProfileQuery } from '../../api/users/users'
 import { EditTicketScreen } from '../EditTicketScreen/EditTicketScreen'
+import { StatsScreen } from '../StatsScreen/StatsScreen'
 
 export type DrawerParamList = {
   MyTickets: undefined,
@@ -21,6 +22,7 @@ export type DrawerParamList = {
   EditTicket: { ticketId: string },
   TicketDetails: { ticketId: string },
   Account: undefined,
+  Stats: undefined,
 }
 
 const Drawer = createDrawerNavigator<DrawerParamList>()
@@ -58,6 +60,7 @@ export const HomeScreen = () => {
         initialParams={{ ticketId: '' }}
       />
       <Drawer.Screen name='Account' component={AccountScreen} />
+      <Drawer.Screen name='Stats' component={StatsScreen} />
     </Drawer.Navigator>
   )
 }

@@ -40,3 +40,8 @@ export interface AddCommentValues {
   date: string
   isPublic: boolean
 }
+
+export interface StatValues {
+  name: string
+  value: string
+}

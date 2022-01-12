@@ -9,7 +9,7 @@ import {
 import { AxiosInstance } from 'axios'
 
 import { useFetch } from '../../providers/FetchProvider'
-import { TicketValues, CreateTicketValues, TicketStatus, AddCommentValues } from './types'
+import { TicketValues, CreateTicketValues, TicketStatus, AddCommentValues, StatValues } from './types'
 
 const getTicket = async (
   instance: AxiosInstance,
@@ -121,7 +121,7 @@ export const useUpdateTicketStatusMutation = (
   )
 }
 
-export const putComment = async (
+const putComment = async (
   instance: AxiosInstance,
   values: AddCommentValues,
   id: string,
@@ -138,6 +138,86 @@ export const useCommentMutation = (
   return useMutation(
     ['addComment', id],
     (values: AddCommentValues) => putComment(fetch, values, id),
+    options
+  )
+}
+
+const getOverallQuantityStats = async (
+  instance: AxiosInstance,
+  status: string,
+): Promise<StatValues[]> => {
+  const { data } = await instance.get(`tickets/stats/quantity/${status}`)
+  return data
+}
+
+export const useOverallQuantityStatsQuery = (
+  status: string,
+  options?: Omit<UseQueryOptions<StatValues[], unknown>, 'queryKey'>
+): UseQueryResult<StatValues[], unknown> => {
+  const { fetch } = useFetch()
+  return useQuery(
+    ['getOverallQuantityStats', status],
+    () => getOverallQuantityStats(fetch, status),
+    options
+  )
+}
+
+const getQuantityStats = async (
+  instance: AxiosInstance,
+  status: string,
+  prio: string,
+): Promise<StatValues[]> => {
+  const { data } = await instance.get(`tickets/stats/quantity/${status}/${prio}`)
+  return data
+}
+
+export const useQuantityStatsQuery = (
+  status: string,
+  prio: string,
+  options?: Omit<UseQueryOptions<StatValues[], unknown>, 'queryKey'>
+): UseQueryResult<StatValues[], unknown> => {
+  const { fetch } = useFetch()
+  return useQuery(
+    ['getQuantityStats', status, prio],
+    () => getQuantityStats(fetch, status, prio),
+    options
+  )
+}
+
+const getOverallSpeedStats = async (
+  instance: AxiosInstance
+): Promise<StatValues[]> => {
+  const { data } = await instance.get('tickets/stats/speed')
+  return data
+}
+
+export const useOverallSpeedStatsQuery = (
+  options?: Omit<UseQueryOptions<StatValues[], unknown>, 'queryKey'>
+): UseQueryResult<StatValues[], unknown> => {
+  const { fetch } = useFetch()
+  return useQuery(
+    'getOverallSpeedStats',
+    () => getOverallSpeedStats(fetch),
+    options
+  )
+}
+
+const getSpeedStats = async (
+  instance: AxiosInstance,
+  prio: string,
+): Promise<StatValues[]> => {
+  const { data } = await instance.get(`tickets/stats/speed/${prio}`)
+  return data
+}
+
+export const useSpeedStatsQuery = (
+  prio: string,
+  options?: Omit<UseQueryOptions<StatValues[], unknown>, 'queryKey'>
+): UseQueryResult<StatValues[], unknown> => {
+  const { fetch } = useFetch()
+  return useQuery(
+    ['getSpeedStats', prio],
+    () => getSpeedStats(fetch, prio),
     options
   )
 }
