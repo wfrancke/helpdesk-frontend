@@ -14,6 +14,16 @@ export interface EditDetailsValues {
   phoneNumber: string
 }
 
+export interface ProfileValues {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+  role: Role
+  specialty: string[]
+}
+
 export interface UserProfileValues {
   _id: string
   firstName: string

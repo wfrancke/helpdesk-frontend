@@ -75,6 +75,7 @@ export default {
       addTag: 'Dodaj tag',
       comments: 'Komantarze',
       typeComment: 'Dodaj komentarz',
+      selectAuto: 'Wybierz automatycznie'
     },
     ticketList: {
       requester: 'Zgłaszający',

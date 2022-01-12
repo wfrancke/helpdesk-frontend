@@ -10,6 +10,7 @@ import { AxiosInstance } from 'axios'
 import { useFetch } from '../../providers/FetchProvider'
 import { SignUpValues,
   EditDetailsValues,
+  ProfileValues,
   UserProfileValues,
   EditPasswordValues,
   TeamAssignmentValues,
@@ -32,13 +33,13 @@ export const useSignUpMutation = (options?: UseMutationOptions<SignUpValues, Err
 
 const getProfile = async (
   instance: AxiosInstance
-): Promise<UserProfileValues> => {
+): Promise<ProfileValues> => {
   const { data } = await instance.get('/users/profile')
   return data
 }
 
-export const useProfileQuery = (options?: Omit<UseQueryOptions<UserProfileValues, unknown>, 'queryKey'>)
-: UseQueryResult<UserProfileValues, unknown> => {
+export const useProfileQuery = (options?: Omit<UseQueryOptions<ProfileValues, unknown>, 'queryKey'>)
+: UseQueryResult<ProfileValues, unknown> => {
   const { fetch } = useFetch()
   return useQuery('getProfile', () => getProfile(fetch), options)
 }

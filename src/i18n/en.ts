@@ -75,6 +75,7 @@ export default {
       addTag: 'Add tag',
       comments: 'Comments',
       typeComment: 'Type comment',
+      selectAuto: 'Select automatically'
     },
     ticketList: {
       requester: 'Requester',

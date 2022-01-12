@@ -28,6 +28,7 @@ export interface CreateTicketValues {
   description: string
   priority: string
   tags: string[]
+  assignedId?: string
 }
 
 export interface TicketStatus {
@@ -45,3 +46,7 @@ export interface StatValues {
   name: string
   value: string
 }
+
+// export interface TicketAssigned {
+//   assignedId: string
+// }

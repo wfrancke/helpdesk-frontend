@@ -221,3 +221,24 @@ export const useSpeedStatsQuery = (
     options
   )
 }
+
+// const putTicketAssigned = async (
+//   instance: AxiosInstance,
+//   values: TicketAssigned,
+//   id: string,
+// ): Promise<TicketAssigned> => {
+//   const { data } = await instance.put(`tickets/assigned/${id}`, values)
+//   return data
+// }
+
+// export const useUpdateTicketAssignedMutation = (
+//   id: string,
+//   options?: UseMutationOptions<TicketAssigned, Error, TicketAssigned>
+// ): UseMutationResult<TicketAssigned, Error, TicketAssigned> => {
+//   const { fetch } = useFetch()
+//   return useMutation(
+//     ['updateTicketAssigned', id],
+//     (values: TicketAssigned) => putTicketAssigned(fetch, values, id),
+//     options
+//   )
+// }
