@@ -1,22 +1,60 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useAssignedTicketsQuery } from '../../../api/tickets/tickets'
 
+import { useAssignedTicketsQuery } from '../../../api/tickets/tickets'
+import { TicketValues } from '../../../api/tickets/types'
 import { TicketList } from '../TicketList/TicketList'
 import * as Styled from './TeamMemberTicketsArea.styles'
 
 interface TeamMemberTicketsAreaProps {
   id: string
   name: string
+  searchType: string
+  searchInput: string
+  refresh: number
 }
 
 export const TeamMemberTicketsArea = ({
   id,
   name,
+  searchType,
+  searchInput,
+  refresh,
 }: TeamMemberTicketsAreaProps ) => {
-  const [isToggled, setIsToggled] = useState<boolean>(false)
+  
   const { data } = useAssignedTicketsQuery(id)
+  
+  const [filteredData, setFilteredData] = useState<TicketValues[]>(data || [])
+  const [isToggled, setIsToggled] = useState<boolean>(false)
+
+  const handleSearchChange = () => {
+    switch (searchType) {
+    case 'Title':
+      setFilteredData(data?.filter((ticket) => ticket.title.includes(searchInput)) || [])
+      break
+    case 'Description':
+      setFilteredData(data?.filter((ticket) => ticket.description.includes(searchInput)) || [])
+      break
+    case 'Status':
+      setFilteredData(data?.filter((ticket) => ticket.status.includes(searchInput)) || [])
+      break
+    case 'Priority':
+      setFilteredData(data?.filter((ticket) => ticket.priority.includes(searchInput)) || [])
+      break
+    case 'Tags':
+      setFilteredData(data?.filter((ticket) => (ticket.tags.some((tag) => tag.includes(searchInput)))) || [])
+      break
+    }
+  }
+
+  useEffect(() => {
+    handleSearchChange()
+  }, [refresh])
+
+  useEffect(() => {
+    setFilteredData(data || [])
+  }, [data])
 
   return (
     <Styled.RootContainer>
@@ -35,7 +73,7 @@ export const TeamMemberTicketsArea = ({
       </Button>
       {isToggled && (
         <TicketList
-          items={data || []}
+          items={filteredData}
         />
       )}
     </Styled.RootContainer>

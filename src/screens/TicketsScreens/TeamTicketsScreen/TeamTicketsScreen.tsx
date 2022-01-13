@@ -13,8 +13,10 @@ export const TeamTicketsScreen = () => {
 
   const { data } = useTeamMembersQuery()
 
+  const [searchInput, setSearchInput] = useState<string>('')
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('Title'))
+  const [refresh, doRefresh] = useState<number>(0)
 
   const handleSearchChange = (value: string) => {
     setSelectedMenuItem(value)
@@ -29,8 +31,10 @@ export const TeamTicketsScreen = () => {
         </Styled.HeaderTitle>
         <Styled.ActionsContainer>
           <Styled.SearchInput
-            label={t('tickets.searchByTitle')}
+            onChangeText={(value) => setSearchInput(value)}
+            label={t('tickets.search')}
             mode='outlined'
+            onKeyPress={() => doRefresh(prev => prev + 1)}
           />
           <MenuSelect
             label={t(`tickets.searchBy${selectedMenuItem}`)}
@@ -65,6 +69,9 @@ export const TeamTicketsScreen = () => {
             key={member._id}
             id={member._id}
             name={`${member.firstName} ${member.lastName}`}
+            searchType={selectedMenuItem}
+            searchInput={searchInput}
+            refresh={refresh}
           />
         ))}
       </Styled.RootContainer>
