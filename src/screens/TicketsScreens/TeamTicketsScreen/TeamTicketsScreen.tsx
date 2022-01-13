@@ -31,7 +31,7 @@ export const TeamTicketsScreen = () => {
         </Styled.HeaderTitle>
         <Styled.ActionsContainer>
           <Styled.SearchInput
-            onChangeText={(value) => setSearchInput(value)}
+            onChangeText={(value) => setSearchInput(value.toLowerCase())}
             label={t('tickets.search')}
             mode='outlined'
             onKeyPress={() => doRefresh(prev => prev + 1)}

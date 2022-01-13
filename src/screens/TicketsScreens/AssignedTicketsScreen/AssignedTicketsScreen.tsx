@@ -23,19 +23,19 @@ export const AssignedTicketsScreen = () => {
     setSelectedMenuItem(value)
     switch (value) {
     case 'Title':
-      setFilteredData(data?.filter((ticket) => ticket.title.includes(searchInput)) || [])
+      setFilteredData(data?.filter((ticket) => ticket.title.toLowerCase().includes(searchInput)) || [])
       break
     case 'Description':
-      setFilteredData(data?.filter((ticket) => ticket.description.includes(searchInput)) || [])
+      setFilteredData(data?.filter((ticket) => ticket.description.toLowerCase().includes(searchInput)) || [])
       break
     case 'Status':
-      setFilteredData(data?.filter((ticket) => ticket.status.includes(searchInput)) || [])
+      setFilteredData(data?.filter((ticket) => ticket.status.toLowerCase().includes(searchInput)) || [])
       break
     case 'Priority':
-      setFilteredData(data?.filter((ticket) => ticket.priority.includes(searchInput)) || [])
+      setFilteredData(data?.filter((ticket) => ticket.priority.toLowerCase().includes(searchInput)) || [])
       break
     case 'Tags':
-      setFilteredData(data?.filter((ticket) => (ticket.tags.some((tag) => tag.includes(searchInput)))) || [])
+      setFilteredData(data?.filter((ticket) => (ticket.tags.some((tag) => tag.toLowerCase().includes(searchInput)))) || [])
       break
     }
     setIsMenuOpen(false)
@@ -53,7 +53,7 @@ export const AssignedTicketsScreen = () => {
         </Styled.HeaderTitle>
         <Styled.ActionsContainer>
           <Styled.SearchInput
-            onChangeText={(value) => setSearchInput(value)}
+            onChangeText={(value) => setSearchInput(value.toLowerCase())}
             label={t('tickets.search')}
             mode='outlined'
             onKeyPress={() => handleSearchChange(selectedMenuItem)}
