@@ -16,7 +16,7 @@ export const TeamTicketsScreen = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>(t('Title'))
 
-  const handleSortChange = (value: string) => {
+  const handleSearchChange = (value: string) => {
     setSelectedMenuItem(value)
     setIsMenuOpen(false)
   }
@@ -33,26 +33,30 @@ export const TeamTicketsScreen = () => {
             mode='outlined'
           />
           <MenuSelect
-            label={t(`tickets.sortBy${selectedMenuItem}`)}
+            label={t(`tickets.searchBy${selectedMenuItem}`)}
             visible={isMenuOpen}
             onDismiss={() => setIsMenuOpen(false)}
             onPress={() => setIsMenuOpen(true)}
           >
             <Menu.Item
-              onPress={() => handleSortChange('Title')}
-              title={t('tickets.sortByTitle')}
+              onPress={() => handleSearchChange('Title')}
+              title={t('tickets.searchByTitle')}
             />
             <Menu.Item
-              onPress={() => handleSortChange('Date')}
-              title={t('tickets.sortByDate')}
+              onPress={() => handleSearchChange('Description')}
+              title={t('tickets.searchByDescription')}
             />
             <Menu.Item
-              onPress={() => handleSortChange('Priority')}
-              title={t('tickets.sortByPriority')}
+              onPress={() => handleSearchChange('Priority')}
+              title={t('tickets.searchByPriority')}
             />
             <Menu.Item
-              onPress={() => handleSortChange('Status')}
-              title={t('tickets.sortByStatus')}
+              onPress={() => handleSearchChange('Status')}
+              title={t('tickets.searchByStatus')}
+            />
+            <Menu.Item
+              onPress={() => handleSearchChange('Tags')}
+              title={t('tickets.searchByTags')}
             />
           </MenuSelect>
         </Styled.ActionsContainer>
